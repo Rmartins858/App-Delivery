@@ -11,7 +11,7 @@ function Login() {
       <Genericinput
         type="email"
         selector="email"
-        fieldName="Email"
+        fieldName="Login"
         placeholder="exmple@exemplo.com"
         setter={ setEmail }
       />
@@ -19,7 +19,7 @@ function Login() {
       <Genericinput
         type="password"
         selector="password"
-        fieldName="Password"
+        fieldName="Senha"
         placeholder="Min. 6 digítos"
         setter={ setPassword }
       />
