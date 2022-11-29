@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-
+// import { useHistory } from 'react-router-dom';
+import Button from '../components/Button';
 import Genericinput from '../components/Genericinput';
 
 function Login() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  // const history = useHistory();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // FAZER A FUNÇÃO DE FORMATAÇÃO DO EMAIL E LIMITE DE SENHA
+  const [isDisabled, setIsDisabled] = useState(true);
 
   return (
     <form>
@@ -23,9 +28,13 @@ function Login() {
         placeholder="Min. 6 digítos"
         setter={ setPassword }
       />
-      <button type="button" onClick={ () => console.log({ email, password }) }>
-        Entrar
-      </button>
+      <Button
+        dataTestId="common_login__button-login"
+        type="submit"
+        name="login"
+        disabled={ isDisabled }
+        text="Login"
+      />
     </form>
   );
 }
