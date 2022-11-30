@@ -5,8 +5,8 @@ class LoginController {
 
   async login(req, res, next) {
     try {
-      const token = await this.service.login(req.body);
-      return res.status(200).json({ token });
+      const loggedUser = await this.service.login(req.body);
+      return res.status(200).json(loggedUser);
     } catch (e) {
       next(e);
     }

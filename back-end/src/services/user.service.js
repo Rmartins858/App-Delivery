@@ -15,10 +15,10 @@ class LoginService {
 
     if (!isPasswordValid) throw { status: 404, message: 'Incorrect email or password' };
 
-    const { id, role } = foundUser;
+    const { id, role, name } = foundUser;
 
     const token = createToken({ id, role });
-    return token;
+    return { name, email, role, token };
   }
 
   async register({ name, email, password, role }) {
