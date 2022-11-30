@@ -3,8 +3,8 @@ import { useMemo, useState } from 'react';
 import userContext from './userContext';
 
 export default function UserProvider({ children }) {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const contextUser = useMemo(() => ({
     email,

@@ -1,22 +1,31 @@
-import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '../components/Button';
 import Genericinput from '../components/Genericinput';
-import SubmitBtn from '../components/SubmitBtn';
 import userContext from '../context/userContext';
+import checkLogin from '../utils/checkLogin';
+import toLogin from '../services/requests';
 
 function Login() {
-  // const history = useHistory();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const history = useHistory();
+  const { email, password, setEmail, setPassword } = useContext(userContext);
 
-  // FAZER A FUNÇÃO DE FORMATAÇÃO DO EMAIL E LIMITE DE SENHA
-  const [isDisabled, setIsDisabled] = useState(true);
+  const onLoginBtnClick = async (e) => {
+    e.preventDefault();
+    try {
+      const { token } = await toLogin('/login', { email, password });
+      console.log(token);
+      localStorage.setItem('user', JSON.stringify({ email }));
+      history.push('/batatas');
+    } catch (error) {
+      console.log('FRONTTTTT', error);
+    }
+  };
 
   return (
     <form>
       <Genericinput
-        dataTestId="common_login__input-email"
+        datatestid="common_login__input-email"
         type="email"
         selector="email"
         fieldName="Login"
@@ -25,7 +34,7 @@ function Login() {
       />
 
       <Genericinput
-        dataTestId="common_login__input-password"
+        datatestid="common_login__input-password"
         type="password"
         selector="password"
         fieldName="Senha"
@@ -33,12 +42,23 @@ function Login() {
         setter={ setPassword }
       />
       <Button
-        dataTestId="common_login__button-login"
+        datatestid="common_login__button-login"
         type="submit"
         name="login"
-        disabled={ isDisabled }
+        disabled={ checkLogin(email, password) }
+        onClick={ onLoginBtnClick }
         text="Login"
       />
+      <Button
+        datatestid="common_login__button-register"
+        type="submit"
+        name="login"
+        disabled={ false }
+        onClick={ () => { history.push('/register'); } }
+        text="Ainda não tenho conta"
+      />
+
+      <span datatestid="common_login__element-invalid-email"> </span>
     </form>
   );
 }

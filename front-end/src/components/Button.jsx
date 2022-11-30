@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Button({ dataTestId, type, name, disabled, onClick, text }) {
+function Button({ datatestid, type, name, disabled, onClick, text }) {
   return (
     <button
-      data-testid={ dataTestId }
+      data-testid={ datatestid }
       type={ type === 'submit' ? 'submit' : 'button' }
       name={ name }
       disabled={ disabled }
@@ -15,17 +15,12 @@ function Button({ dataTestId, type, name, disabled, onClick, text }) {
   );
 }
 
-Button.defaultProps = {
-  disabled: false,
-  onClick: () => {},
-};
-
 Button.propTypes = {
-  dataTestId: PropTypes.string.isRequired,
+  datatestid: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  disabled: PropTypes.bool,
-  onClick: PropTypes.func,
+  disabled: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
 };
 
