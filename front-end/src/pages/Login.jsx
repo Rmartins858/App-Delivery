@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import Button from '../components/Button';
 import Genericinput from '../components/Genericinput';
+import SubmitBtn from '../components/SubmitBtn';
 import userContext from '../context/userContext';
 
 function Login() {
@@ -15,6 +16,7 @@ function Login() {
   return (
     <form>
       <Genericinput
+        dataTestId="common_login__input-email"
         type="email"
         selector="email"
         fieldName="Login"
@@ -23,6 +25,7 @@ function Login() {
       />
 
       <Genericinput
+        dataTestId="common_login__input-password"
         type="password"
         selector="password"
         fieldName="Senha"
