@@ -1,6 +1,7 @@
 const { User } = require('../database/models');
 const { createToken } = require('../utils/JWT');
 const md5 = require('md5');
+const { Op } = require('sequelize');
 
 class LoginService {
   model = User;
@@ -18,6 +19,16 @@ class LoginService {
 
     const token = createToken({ id, role });
     return token;
+  }
+
+  async register({ name, email, password, role }) {
+    const foundUser = await this.model.findOne({ where: { [Op.or]: [ { email }, { name } ] }});
+    console.log('oi')
+
+    if(foundUser) throw { status: 409, message: 'User already exists'}
+
+    const newUser = await this.model.create({name, email, password: md5(password), role })
+    return newUser;
   }
 }
 
