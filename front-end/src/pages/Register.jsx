@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+// import { useHistory } from 'react-router-dom';
 import Genericinput from '../components/Genericinput';
+import Button from '../components/Button';
 
 function Register() {
-  const history = useHistory();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  // const history = useHistory();
 
   return (
     <form>
       <Genericinput
         type="email"
         selector="email"
-        fieldName="Login"
+        fieldName="Nome"
+        placeholder="Seu nome"
+        // setter={ setEmail }
+        datatestid="common_register__input-email "
+      />
+
+      <Genericinput
+        type="email"
+        selector="email"
+        fieldName="Email"
         placeholder="exmple@exemplo.com"
-        setter={ setEmail }
+        // setter={ setEmail }
+        datatestid="common_register__input-email "
       />
 
       <Genericinput
@@ -22,11 +31,18 @@ function Register() {
         selector="password"
         fieldName="Senha"
         placeholder="Min. 6 digítos"
-        setter={ setPassword }
+        // setter={ setPassword }
+        datatestid="common_register__input-password"
       />
-      <button type="button" onClick={ () => console.log({ email, password }) }>
-        Entrar
-      </button>
+
+      <Button
+        datatestid="common_register__button-register"
+        type="submit"
+        name="register"
+        disabled={ checkLogin() }
+        // onClick={ onLoginBtnClick }
+        text="Cadastrar"
+      />
     </form>
   );
 }

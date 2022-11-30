@@ -1,15 +1,12 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import UserProvider from './context/UserProvider';
-import Login from './pages/Login';
+import Routes from './routes/Route';
+import UserProvider from './context/userProvider';
 
 function App() {
   return (
-    <Routes>
-      <UserProvider>
-        <Route exact path="/" element={ <Login /> } />
-      </UserProvider>
-    </Routes>
+    <UserProvider>
+      <Routes />
+    </UserProvider>
   );
 }
 
