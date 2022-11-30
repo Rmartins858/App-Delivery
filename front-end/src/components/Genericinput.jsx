@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-function Genericinput({ selector, type, placeholder, setter, fieldName }) {
+function Genericinput({ selector, type, placeholder, setter, fieldName, dataTestId }) {
   return (
     <label htmlFor={ selector }>
       { fieldName }
       <input
+        data-testid={ dataTestId }
         type={ type }
         id={ selector }
         className={ selector }
@@ -17,6 +18,7 @@ function Genericinput({ selector, type, placeholder, setter, fieldName }) {
 }
 
 Genericinput.propTypes = {
+  dataTestId: PropTypes.string,
   placeholder: PropTypes.string,
   selector: PropTypes.string,
   setter: PropTypes.func,
