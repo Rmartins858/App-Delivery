@@ -1,22 +1,17 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: `http://localhost:${process.env.REACT_APP_API_PORT || '33306'}`,
-  headers: {
-    common: {
-      Authorization: localStorage.getItem('token'),
-    },
-  },
+  baseURL: `http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}`,
 });
 
-export const toLogin = async (endpoint, body) => {
+export default async function toLogin(endpoint, body) {
   const { data } = await api.post(endpoint, body);
   return data;
-};
+}
 
-export const setToken = (token) => {
-  api.defaults.headers.common.Authorization = token;
-};
+// export const setToken = (token) => {
+//   api.defaults.headers.common.Authorization = token;
+// };
 // export const setToken = (token) => {
 //   api.defaults.headers.common.Authorization = token;
 // };
@@ -31,4 +26,4 @@ export const setToken = (token) => {
 //   return data;
 // };
 
-export default api;
+// export default api;

@@ -4,18 +4,22 @@ import Button from '../components/Button';
 import Genericinput from '../components/Genericinput';
 import userContext from '../context/userContext';
 import checkLogin from '../utils/checkLogin';
-import { toLogin } from '../services/requests';
+import toLogin from '../services/requests';
 
 function Login() {
   const history = useHistory();
   const { email, password, setEmail, setPassword } = useContext(userContext);
 
-  const onLoginBtnClick = async () => {
-    const { token } = await toLogin('/login', { email, password });
-    console.log(token);
-
-    localStorage.setItem('user', JSON.stringify({ email }));
-    history.push('/batatas');
+  const onLoginBtnClick = async (e) => {
+    e.preventDefault();
+    try {
+      const { token } = await toLogin('/login', { email, password });
+      console.log(token);
+      localStorage.setItem('user', JSON.stringify({ email }));
+      history.push('/batatas');
+    } catch (error) {
+      console.log('FRONTTTTT', error);
+    }
   };
 
   return (
