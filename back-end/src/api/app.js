@@ -2,7 +2,7 @@ const express = require('express');
 const errorMiddleware = require('../middlewares/error.middleware');
 const loginRouter = require('../routes/login.routes');
 const registerRouter = require('../routes/register.routes')
-const productRouter = require('../routes/product.routes');
+const productRouter = require('../routes/customer.routes');
 
 const app = express();
 
