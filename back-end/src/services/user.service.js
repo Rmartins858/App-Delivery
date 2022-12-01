@@ -1,19 +1,27 @@
-const { User } = require('../database/models');
-const { createToken } = require('../utils/JWT');
 const md5 = require('md5');
 const { Op } = require('sequelize');
+const { User } = require('../database/models');
+const { createToken } = require('../utils/JWT');
 
-class LoginService {
-  model = User;
+class UserService {
+  constructor() {
+    this.model = User;
+  }
 
   async login({ email, password }) {
-    const foundUser = await this.model.findOne({ where: { email }});
+    const foundUser = await this.model.findOne({ where: { email } });
 
-    if (!foundUser) throw { status: 404, message: 'Incorrect email or password' };
+    if (!foundUser) {
+      const err = { status: 404, message: 'Incorrect email or password' };
+      throw err;
+    }
 
     const isPasswordValid = md5(password) === foundUser.password;
 
-    if (!isPasswordValid) throw { status: 404, message: 'Incorrect email or password' };
+    if (!isPasswordValid) {
+      const err = { status: 404, message: 'Incorrect email or password' };
+      throw err;
+    }
 
     const { id, role, name } = foundUser;
 
@@ -22,14 +30,24 @@ class LoginService {
   }
 
   async register({ name, email, password, role }) {
-    const foundUser = await this.model.findOne({ where: { [Op.or]: [ { email }, { name } ] }});
-    console.log('oi')
+    const foundUser = await this.model.findOne({ where: { [Op.or]: [{ email }, { name }] } });
 
-    if(foundUser) throw { status: 409, message: 'User already exists'}
+    if (foundUser) {
+     const err = { status: 409, message: 'User already exists' };
+     throw err;
+    }
 
-    const newUser = await this.model.create({name, email, password: md5(password), role })
-    return newUser;
+    await this.model.create({ name, email, password: md5(password), role });
+  }
+
+  async getSellers() {
+    const sellers = await this.model.findAll({
+      where: { role: 'seller' },
+      attributes: ['id', 'name'],
+    });
+    
+    return sellers;
   }
 }
 
-module.exports = LoginService;
+module.exports = UserService;

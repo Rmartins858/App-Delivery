@@ -1,7 +1,9 @@
-const LoginService = require("../services/user.service");
+const UserService = require('../services/user.service');
 
-class LoginController {
-  service = new LoginService();
+class UserController {
+  constructor() {
+    this.service = new UserService();
+  }
 
   async login(req, res, next) {
     try {
@@ -14,12 +16,34 @@ class LoginController {
 
   async register(req, res, next) {
     try {
-      await this.service.register(req.body)
-      return res.status(201).json({message: 'Account created successfully!'})
+      await this.service.register(req.body);
+      return res.status(201).json({ message: 'Account created successfully!' });
     } catch (e) {
-      next(e)
+      next(e);
+    }
+  }
+
+  async admRegister(req, res, next) {
+    if (req.userRole !== 'administrator') {
+      return res.sendStatus(403);
+    }
+
+    try {
+      await this.service.register(req.body);
+      return res.status(201).json({ message: 'Account created successfully!' });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getSellers(_req, res, next) {
+    try {
+      const sellers = await this.service.getSellers();
+      return res.status(200).json(sellers);
+    } catch (e) {
+      next(e);
     }
   }
 }
 
-module.exports = LoginController;
+module.exports = UserController;
