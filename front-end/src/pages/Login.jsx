@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 import Button from '../components/Button';
 import Genericinput from '../components/Genericinput';
 import userContext from '../context/userContext';
-import checkLogin from '../utils/checkLogin';
-import postUser from '../services/requests';
+import { checkLogin } from '../utils/checkLogin';
+import { postUser } from '../services/requests';
 
 function Login() {
   const history = useHistory();

@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 import Genericinput from '../components/Genericinput';
 import userContext from '../context/userContext';
 import Button from '../components/Button';
-import checkLogin from '../utils/checkLogin';
-import postUser from '../services/requests';
+import { checkRegister } from '../utils/checkLogin';
+import { postUser } from '../services/requests';
 
 function Register() {
   const history = useHistory();
@@ -22,7 +22,7 @@ function Register() {
   const onRegisterBtnClick = async (e) => {
     e.preventDefault();
     try {
-      await postUser('/register', { name, email, password });
+      await postUser('/register', { name, email, password, role: 'customer' });
       history.push('/login');
     } catch (error) {
       const mensagem = error.response.data;
@@ -64,7 +64,7 @@ function Register() {
         datatestid="common_register__button-register"
         type="submit"
         name="register"
-        disabled={ checkLogin(email, password) }
+        disabled={ checkRegister(email, password, name) }
         onClick={ onRegisterBtnClick }
         text="Cadastrar"
       />

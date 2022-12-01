@@ -1,9 +1,10 @@
-const checkLogin = (email, password) => {
+export const checkRegister = (email, password, name) => {
   const testEmail = /\S+@\S+\.\S+/;
-  const numberMin = 6;
-  const result = !((testEmail.test(email) && password.length >= numberMin));
-
-  return result;
+  return !((testEmail.test(email)
+  && password.length >= +'6' && name.length >= +'12'));
 };
 
-export default checkLogin;
+export const checkLogin = (email, password) => {
+  const testEmail = /\S+@\S+\.\S+/;
+  return !((testEmail.test(email) && password.length >= +'6'));
+};
