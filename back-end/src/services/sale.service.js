@@ -1,26 +1,38 @@
-const ProductController = require("../controllers/product.controller");
-const { Sale, SalesProduct } = require("../database/models");
+const { Sale, SalesProduct, Product, User } = require('../database/models');
 
 class SaleService {
-  saleModel = Sale;
-  salesProductModel = SalesProduct;
+  constructor() {
+    this.saleModel = Sale;
+    this.salesProductModel = SalesProduct;
+  }
 
-  async getAll(userId) {
-    const allOrders = await this.saleModel.findAll({ where: { userId } });
+  async getAll(data) {
+    const allOrders = await this.saleModel.findAll({
+      where: data,
+      include: [],
+    });
     return allOrders;
   }
 
   async getOne(id) {
-    const order = await this.saleModel.findOne({ where: { id } });
+    const order = await this.saleModel.findOne({
+      where: { id },
+      include: [
+        { model: Product, as: 'products', through: { attributes: ['quantity'] } },
+        { model: User, as: 'seller', attributes: ['name'] },
+      ],
+    });
+
     return order;
   }
 
   async create({ saleData, saleProducts }) {
-    console.log('oi')
     const { id } = await this.saleModel.create(saleData);
-    console.log(id)
 
-    if (!id) throw { status: 409, message: "Erro ao cadastrar pedido" };
+    if (!id) {
+      const err = { status: 409, message: 'Erro ao cadastrar pedido' };
+      throw err;
+    }
 
     await Promise.all(
       saleProducts.map(
@@ -29,10 +41,9 @@ class SaleService {
             saleId: id,
             productId: product.id,
             quantity: product.qty,
-          })
-        
-      )
-    )    
+          }),
+      ),
+    );   
   }
 }
 

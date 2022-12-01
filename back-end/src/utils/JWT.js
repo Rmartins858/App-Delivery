@@ -17,4 +17,4 @@ const validateToken = (token) => verify(token, SECRET);
 module.exports = {
   createToken,
   validateToken,
-}
+};

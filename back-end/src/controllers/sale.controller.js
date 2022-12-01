@@ -1,12 +1,19 @@
-const SaleService = require("../services/sale.service");
+const SaleService = require('../services/sale.service');
 
 class SaleController {
-  service = new SaleService();
+  constructor() {
+    this.service = new SaleService();
+  }
 
   async getAll(req, res, next) {
     try {
-      const { userId } = req;
-      const allOrders = await this.service.getAll(userId);
+      const { userId, userRole } = req;
+      const user = userRole === 'seller' ? 'sellerId' : 'userID';
+      const data = {
+        [user]: userId,
+      };
+      const allOrders = await this.service.getAll(data);
+
       return res.status(200).json(allOrders);
     } catch (e) {
       next(e);
@@ -16,20 +23,20 @@ class SaleController {
   async getOne(req, res, next) {
     try {
       const { id } = req.params;
-      const order = await this.service.getOne(id)
-      return res.status(200).json(order)
+      const order = await this.service.getOne(id);
+
+      return res.status(200).json(order);
     } catch (e) {
-      next(e)
+      next(e);
     }
   }
-
   
   async create(req, res, next) {
     try {
       await this.service.create(req.body);
-      return res.sendStatus(201)
+      return res.sendStatus(201);
     } catch (e) {
-      next(e)
+      next(e);
     }
   }
 }
