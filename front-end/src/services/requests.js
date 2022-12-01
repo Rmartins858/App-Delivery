@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: `http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}`,
 });
 
-export default async function toLogin(endpoint, body) {
+export default async function postUser(endpoint, body) {
   const { data } = await api.post(endpoint, body);
   return data;
 }
