@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../components/Button';
 import Genericinput from '../components/Genericinput';
@@ -9,16 +9,20 @@ import toLogin from '../services/requests';
 function Login() {
   const history = useHistory();
   const { email, password, setEmail, setPassword } = useContext(userContext);
+  const [errorMensage, setErrorMensage] = useState('');
 
   const onLoginBtnClick = async (e) => {
     e.preventDefault();
     try {
-      const { token } = await toLogin('/login', { email, password });
-      console.log(token);
+      const userData = await toLogin('/login', { email, password });
+      const { token } = userData;
       localStorage.setItem('user', JSON.stringify({ email }));
-      history.push('/batatas');
+      localStorage.setItem('token', JSON.stringify({ token }));
+      history.push('/customer/products');
     } catch (error) {
-      console.log('FRONTTTTT', error);
+      const mensagem = error.response.data;
+      setErrorMensage(mensagem);
+      console.log('FRONTERROR', mensagem);
     }
   };
 
@@ -58,7 +62,9 @@ function Login() {
         text="Ainda não tenho conta"
       />
 
-      <span datatestid="common_login__element-invalid-email"> </span>
+      <span data-testid="common_login__element-invalid-email">
+        {errorMensage}
+      </span>
     </form>
   );
 }
