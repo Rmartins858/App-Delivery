@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from './Button';
-import userContext from '../context/userContext';
 
 function Header() {
   const history = useHistory();
-  const { name } = useContext(userContext);
-
+  const { name } = JSON.parse(localStorage.getItem('name'));
+  console.log(name);
   return (
     <header>
       <nav>
@@ -15,6 +13,7 @@ function Header() {
           type="button"
           text="Produtos"
           name="orders"
+          disabled={ false }
           onClick={ () => { history.push('/customer/products'); } }
         />
         <Button
@@ -22,6 +21,7 @@ function Header() {
           type="button"
           text="Meus Pedidos"
           name="orders"
+          disabled={ false }
           onClick={ () => { history.push('/customer/orders'); } }
         />
         <span
@@ -33,7 +33,8 @@ function Header() {
           datatestid="customer_products__element-navbar-link-logout"
           type="button"
           text="Sair"
-          name="orders"
+          name="logout"
+          disabled={ false }
           onClick={ () => { history.push('/login'); } }
         />
       </nav>

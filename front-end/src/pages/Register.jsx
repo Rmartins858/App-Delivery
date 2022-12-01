@@ -8,13 +8,21 @@ import postUser from '../services/requests';
 
 function Register() {
   const history = useHistory();
-  const { email, password, setEmail, setPassword } = useContext(userContext);
+  const {
+    name,
+    email,
+    password,
+    setEmail,
+    setPassword,
+    setName,
+  } = useContext(userContext);
+
   const [errorMessage, setErrorMessage] = useState('');
 
   const onRegisterBtnClick = async (e) => {
     e.preventDefault();
     try {
-      await postUser('/register', { email, password });
+      await postUser('/register', { name, email, password });
       history.push('/login');
     } catch (error) {
       const mensagem = error.response.data;
@@ -26,12 +34,12 @@ function Register() {
   return (
     <form>
       <Genericinput
-        type="email"
-        selector="email"
+        type="text"
+        selector="name"
         fieldName="Nome"
         placeholder="Seu nome"
-        setter={ setEmail }
-        datatestid="common_register__input-email "
+        setter={ setName }
+        datatestid="common_register__input-name"
       />
 
       <Genericinput
@@ -40,7 +48,7 @@ function Register() {
         fieldName="Email"
         placeholder="exmple@exemplo.com"
         setter={ setEmail }
-        datatestid="common_register__input-email "
+        datatestid="common_register__input-email"
       />
 
       <Genericinput
