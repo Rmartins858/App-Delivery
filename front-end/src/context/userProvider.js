@@ -5,13 +5,16 @@ import userContext from './userContext';
 export default function UserProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
 
   const contextUser = useMemo(() => ({
     email,
     setEmail,
     password,
     setPassword,
-  }), [email, password]);
+    name,
+    setName,
+  }), [email, password, name]);
 
   return (
     <userContext.Provider value={ contextUser }>
