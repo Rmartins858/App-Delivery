@@ -23,6 +23,19 @@ class UserController {
     }
   }
 
+  async admRegister(req, res, next) {
+    if (req.userRole !== 'administrator') {
+      return res.sendStatus(403);
+    }
+
+    try {
+      await this.service.register(req.body);
+      return res.status(201).json({ message: 'Account created successfully!' });
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async getSellers(_req, res, next) {
     try {
       const sellers = await this.service.getSellers();

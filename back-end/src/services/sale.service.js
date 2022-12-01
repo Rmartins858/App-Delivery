@@ -45,6 +45,13 @@ class SaleService {
       ),
     );   
   }
+
+  async update(id, status) {
+    await this.saleModel.update(
+      { status },
+      { where: { id } },
+    );
+  }
 }
 
 module.exports = SaleService;

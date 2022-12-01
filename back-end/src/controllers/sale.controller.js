@@ -39,6 +39,14 @@ class SaleController {
       next(e);
     }
   }
+
+  async update(req, res, _next) {
+    const { id } = req.params;
+    const { status } = req.body;
+    
+    await this.service.update(id, status);
+    return res.sendStatus(200);
+  }
 }
 
 module.exports = SaleController;

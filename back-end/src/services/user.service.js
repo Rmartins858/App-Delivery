@@ -37,8 +37,7 @@ class UserService {
      throw err;
     }
 
-    const newUser = await this.model.create({ name, email, password: md5(password), role });
-    return newUser;
+    await this.model.create({ name, email, password: md5(password), role });
   }
 
   async getSellers() {
