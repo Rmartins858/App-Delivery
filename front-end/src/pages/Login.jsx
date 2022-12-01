@@ -4,24 +4,24 @@ import Button from '../components/Button';
 import Genericinput from '../components/Genericinput';
 import userContext from '../context/userContext';
 import checkLogin from '../utils/checkLogin';
-import toLogin from '../services/requests';
+import postUser from '../services/requests';
 
 function Login() {
   const history = useHistory();
   const { email, password, setEmail, setPassword } = useContext(userContext);
-  const [errorMensage, setErrorMensage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const onLoginBtnClick = async (e) => {
     e.preventDefault();
     try {
-      const userData = await toLogin('/login', { email, password });
+      const userData = await postUser('/login', { email, password });
       const { token } = userData;
       localStorage.setItem('user', JSON.stringify({ email }));
       localStorage.setItem('token', JSON.stringify({ token }));
       history.push('/customer/products');
     } catch (error) {
       const mensagem = error.response.data;
-      setErrorMensage(mensagem);
+      setErrorMessage(mensagem);
       console.log('FRONTERROR', mensagem);
     }
   };
@@ -63,7 +63,7 @@ function Login() {
       />
 
       <span data-testid="common_login__element-invalid-email">
-        {errorMensage}
+        {errorMessage}
       </span>
     </form>
   );
