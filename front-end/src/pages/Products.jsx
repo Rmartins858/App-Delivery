@@ -9,7 +9,6 @@ function Products() {
   useEffect(() => {
     getProducts('/products')
       .then((res) => setProducts(res));
-    console.log(products);
   }, []);
 
   return (
@@ -18,6 +17,7 @@ function Products() {
       {products.length && products.map((product) => (
         <ProductCard
           key={ product.id }
+          id={ product.id }
           urlImage={ product.urlImage }
           name={ product.name }
           price={ product.price }
