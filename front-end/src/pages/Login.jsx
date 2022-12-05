@@ -15,11 +15,14 @@ function Login() {
     e.preventDefault();
     try {
       const userData = await postUser('/login', { email, password });
-      const { token, name } = userData;
-      localStorage.setItem('email', JSON.stringify({ email }));
-      localStorage.setItem('token', JSON.stringify({ token }));
-      localStorage.setItem('name', JSON.stringify({ name }));
-
+      const { name, role, token } = userData;
+      const user = {
+        name,
+        email,
+        role,
+        token,
+      };
+      localStorage.setItem('user', JSON.stringify(user));
       history.push('/customer/products');
     } catch (error) {
       const mensagem = error.response.data;
