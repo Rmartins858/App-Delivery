@@ -24,14 +24,14 @@ module.exports = {
         url_image: 'http://localhost:3001/images/brahma_600ml.jpg',
       },
       {
-        name: 'Skol Beats Senses 313ml',
-        price: 4.49,
-        url_image: 'http://localhost:3001/images/skol_beats_senses_313ml.jpg',
-      },
-      {
         name: 'Skol 269ml',
         price: 2.19,
         url_image: 'http://localhost:3001/images/skol_269ml.jpg',
+      },
+      {
+        name: 'Skol Beats Senses 313ml',
+        price: 4.49,
+        url_image: 'http://localhost:3001/images/skol_beats_senses_313ml.jpg',
       },
       {
         name: 'Becks 330ml',
@@ -45,7 +45,7 @@ module.exports = {
       },
       {
         name: 'Becks 600ml',
-        price: 8.99,
+        price: 8.89,
         url_image: 'http://localhost:3001/images/becks_600ml.jpg',
       },
       {
