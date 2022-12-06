@@ -27,7 +27,7 @@ function ProductCard({ price, urlImage, name, id, updateTotal, product }) {
       } else {
         cart = [
           ...cart,
-          { name, price, qty },
+          { name, price, qty, id },
         ];
       }
       const updatedCart = cart.filter((prod) => prod.qty);
