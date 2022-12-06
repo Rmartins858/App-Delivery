@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function TableOrders() {
-  const cart = JSON.parse(localStorage.getItem('carrinho'));
+  const [cart, setCart] = useState([]);
 
-  const deleteList = (item) => {
-    const newCart = cart.filter((elem) => elem !== item);
-    localStorage.setItem('carrinho', JSON.stringify(newCart));
+  const getCart = () => {
+    setCart(JSON.parse(localStorage.getItem('carrinho')) || []);
   };
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
+  const deleteList = (id) => {
+    const newCart = cart.filter((elem) => elem.id !== id);
+    localStorage.setItem('carrinho', JSON.stringify(newCart));
+    getCart();
+  };
+
+  const getTotal = () => (
+    cart.reduce((acc, curr) => {
+      acc += (curr.qty * curr.price);
+      return acc;
+    }, 0).toFixed(2)
+  );
 
   return (
     <div>
@@ -39,29 +55,51 @@ function TableOrders() {
                 </tr>
               </thead>
               <tbody>
-                {cart.length && cart.map((item, index) => (
-                  <tr key={ item.name }>
-                    <td>
-                      { index + 1 }
+                {cart.length && cart.map(({ name, id, qty, price }, index) => (
+                  <tr key={ id }>
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-item-number-${index}`
+                      }
+                    >
+                      { id }
                     </td>
-                    <td>
-                      { item.name }
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-name-${index}`
+                      }
+                    >
+                      { name }
                     </td>
-                    <td>
-                      { item.qty }
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-quantity-${index}`
+                      }
+                    >
+                      { qty }
                     </td>
-                    <td>
-                      { `R$ ${item.price}` }
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-unit-price-${index}`
+                      }
+                    >
+                      { `R$ ${price}` }
                     </td>
-                    <td>
-                      { `R$ ${(item.qty * item.price).toFixed(2)}`}
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-sub-total-${index}`
+                      }
+                    >
+                      { `R$ ${(qty * price).toFixed(2)}`}
                     </td>
                     <td>
                       <button
                         type="button"
-                        data-testid="delete-btn"
+                        data-testid={
+                          `customer_checkout__element-order-table-remove-${index}`
+                        }
                         onClick={
-                          () => deleteList(item)
+                          () => deleteList(id)
                         }
                       >
                         Remover
@@ -74,11 +112,10 @@ function TableOrders() {
           )
       }
       <div>
-        <h3>
-          {`Total: R$ ${cart.reduce((acc, curr) => {
-            acc += (curr.qty * curr.price);
-            return acc;
-          }, 0).toFixed(2)}`}
+        <h3
+          data-testid="customer_checkout__element-order-total-price"
+        >
+          {`Total: R$ ${getTotal()}`}
 
         </h3>
       </div>
