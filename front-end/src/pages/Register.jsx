@@ -22,8 +22,9 @@ function Register() {
   const onRegisterBtnClick = async (e) => {
     e.preventDefault();
     try {
-      await loginPost('/register', { name, email, password, role: 'customer' });
-      localStorage.setItem('user', JSON.stringify({ name, email }));
+      const user = await loginPost('/register', {
+        name, email, password, role: 'customer' });
+      localStorage.setItem('user', JSON.stringify(user));
       history.push('customer/products');
     } catch (error) {
       const mensagem = error.response.data;

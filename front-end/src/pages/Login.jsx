@@ -14,17 +14,9 @@ function Login() {
   const onLoginBtnClick = async (e) => {
     e.preventDefault();
     try {
-      const userData = await loginPost('/login', { email, password });
-      const { name, role, token, id } = userData;
-      const user = {
-        id,
-        name,
-        email,
-        role,
-        token,
-      };
+      const user = await loginPost('/login', { email, password });
       localStorage.setItem('user', JSON.stringify(user));
-      switch (role) {
+      switch (user.role) {
       case 'customer':
         history.push('/customer/products');
         break;
