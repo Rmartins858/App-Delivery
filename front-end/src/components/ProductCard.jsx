@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-function ProductCard({ price, urlImage, name, id, updateTotal }) {
-  const [qty, setQty] = useState(0);
+function ProductCard({ price, urlImage, name, id, updateTotal, product }) {
+  const [qty, setQty] = useState(product.qty || 0);
 
   const calculateTotal = (cart) => {
     if (cart.length) {
@@ -32,11 +32,12 @@ function ProductCard({ price, urlImage, name, id, updateTotal }) {
       }
       const updatedCart = cart.filter((prod) => prod.qty);
       localStorage.setItem('carrinho', JSON.stringify(updatedCart));
-      console.log(calculateTotal(updatedCart));
       updateTotal(calculateTotal(updatedCart));
     } else {
-      localStorage.setItem('carrinho', JSON.stringify([{ name, price, qty }]));
-      console.log(calculateTotal([{ name, price, qty }]));
+      localStorage.setItem(
+        'carrinho',
+        JSON.stringify([{ name, price, qty }]),
+      );
       updateTotal(calculateTotal([{ name, price, qty }]));
     }
   };
