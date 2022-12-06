@@ -26,7 +26,7 @@ class UserService {
     const { id, role, name } = foundUser;
 
     const token = createToken({ id, role });
-    return { name, email, role, token };
+    return { name, email, role, token, id };
   }
 
   async register({ name, email, password, role }) {
