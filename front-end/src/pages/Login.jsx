@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import Genericinput from '../components/Genericinput';
 import userContext from '../context/userContext';
 import { checkLogin } from '../utils/checkLogin';
-import { postUser } from '../services/requests';
+import { loginPost } from '../services/requests';
 
 function Login() {
   const history = useHistory();
@@ -14,16 +14,9 @@ function Login() {
   const onLoginBtnClick = async (e) => {
     e.preventDefault();
     try {
-      const userData = await postUser('/login', { email, password });
-      const { name, role, token } = userData;
-      const user = {
-        name,
-        email,
-        role,
-        token,
-      };
+      const user = await loginPost('/login', { email, password });
       localStorage.setItem('user', JSON.stringify(user));
-      switch (role) {
+      switch (user.role) {
       case 'customer':
         history.push('/customer/products');
         break;
@@ -39,7 +32,6 @@ function Login() {
     } catch (error) {
       const mensagem = error.response.data;
       setErrorMessage(mensagem);
-      console.log('FRONTERROR', mensagem);
     }
   };
 

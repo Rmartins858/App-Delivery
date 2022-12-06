@@ -4,7 +4,7 @@ import Genericinput from '../components/Genericinput';
 import userContext from '../context/userContext';
 import Button from '../components/Button';
 import { checkRegister } from '../utils/checkLogin';
-import { postUser } from '../services/requests';
+import { loginPost } from '../services/requests';
 
 function Register() {
   const history = useHistory();
@@ -22,12 +22,13 @@ function Register() {
   const onRegisterBtnClick = async (e) => {
     e.preventDefault();
     try {
-      await postUser('/register', { name, email, password, role: 'customer' });
-      history.push('/login');
+      const user = await loginPost('/register', {
+        name, email, password, role: 'customer' });
+      localStorage.setItem('user', JSON.stringify(user));
+      history.push('customer/products');
     } catch (error) {
       const mensagem = error.response.data;
       setErrorMessage(mensagem);
-      console.log('FRONTERROR', mensagem);
     }
   };
 

@@ -16,8 +16,8 @@ class UserController {
 
   async register(req, res, next) {
     try {
-      await this.service.register(req.body);
-      return res.status(201).json({ message: 'Account created successfully!' });
+      const newUser = await this.service.register(req.body);
+      return res.status(201).json(newUser);
     } catch (e) {
       next(e);
     }

@@ -39,11 +39,13 @@ class SaleService {
         (product) => 
           this.salesProductModel.create({
             saleId: id,
-            productId: product.id,
-            quantity: product.qty,
+            productId: product.productId,
+            quantity: product.quantity,
           }),
       ),
-    );   
+    );
+    
+    return id
   }
 
   async update(id, status) {

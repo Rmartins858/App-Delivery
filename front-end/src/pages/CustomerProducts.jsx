@@ -19,6 +19,14 @@ function CustomerProducts() {
     history.push('/customer/checkout');
   };
 
+  const getQty = () => {
+    if (localStorage.getItem('carrinho')) {
+      const cart = JSON.parse(localStorage.getItem('carrinho'));
+      return cart;
+    }
+    return [];
+  };
+
   return (
     <div>
       <Header />
@@ -30,6 +38,7 @@ function CustomerProducts() {
           name={ product.name }
           price={ product.price }
           updateTotal={ (total) => setCartToal(total) }
+          product={ getQty().find((prod) => prod.name === product.name) || 0 }
         />
       ))}
       <Button

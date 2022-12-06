@@ -33,8 +33,8 @@ class SaleController {
   
   async create(req, res, next) {
     try {
-      await this.service.create(req.body);
-      return res.sendStatus(201);
+      const id = await this.service.create(req.body);
+      return res.status(201).json({ id });
     } catch (e) {
       next(e);
     }
