@@ -13,7 +13,7 @@ function TableOrders() {
       <h3> Finalizar Pedido </h3>
 
       {
-        !cart.length ? 'sem pedido :('
+        !cart.length ? 'sem pedido  :('
           : (
             <table>
               <thead>
