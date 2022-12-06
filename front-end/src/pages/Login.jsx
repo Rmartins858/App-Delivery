@@ -23,7 +23,19 @@ function Login() {
         token,
       };
       localStorage.setItem('user', JSON.stringify(user));
-      history.push('/customer/products');
+      switch (role) {
+      case 'customer':
+        history.push('/customer/products');
+        break;
+      case 'seller':
+        history.push('/seller/orders');
+        break;
+      case 'administrator':
+        history.push('admin/manage');
+        break;
+      default:
+        break;
+      }
     } catch (error) {
       const mensagem = error.response.data;
       setErrorMessage(mensagem);
