@@ -15,12 +15,27 @@ function Login() {
     e.preventDefault();
     try {
       const userData = await postUser('/login', { email, password });
-      const { token, name } = userData;
-      localStorage.setItem('email', JSON.stringify({ email }));
-      localStorage.setItem('token', JSON.stringify({ token }));
-      localStorage.setItem('name', JSON.stringify({ name }));
-
-      history.push('/customer/products');
+      const { name, role, token } = userData;
+      const user = {
+        name,
+        email,
+        role,
+        token,
+      };
+      localStorage.setItem('user', JSON.stringify(user));
+      switch (role) {
+      case 'customer':
+        history.push('/customer/products');
+        break;
+      case 'seller':
+        history.push('/seller/orders');
+        break;
+      case 'administrator':
+        history.push('admin/manage');
+        break;
+      default:
+        break;
+      }
     } catch (error) {
       const mensagem = error.response.data;
       setErrorMessage(mensagem);

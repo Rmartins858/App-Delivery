@@ -3,8 +3,13 @@ import Button from './Button';
 
 function Header() {
   const history = useHistory();
-  const { name } = JSON.parse(localStorage.getItem('name'));
-  console.log(name);
+  const { name } = JSON.parse(localStorage.getItem('user'));
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    history.push('/login');
+  };
+
   return (
     <header>
       <nav>
@@ -35,7 +40,7 @@ function Header() {
           text="Sair"
           name="logout"
           disabled={ false }
-          onClick={ () => { history.push('/login'); } }
+          onClick={ logout }
         />
       </nav>
     </header>
