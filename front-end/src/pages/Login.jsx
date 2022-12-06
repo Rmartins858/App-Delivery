@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import Genericinput from '../components/Genericinput';
 import userContext from '../context/userContext';
 import { checkLogin } from '../utils/checkLogin';
-import { postUser } from '../services/requests';
+import { loginPost } from '../services/requests';
 
 function Login() {
   const history = useHistory();
@@ -14,9 +14,10 @@ function Login() {
   const onLoginBtnClick = async (e) => {
     e.preventDefault();
     try {
-      const userData = await postUser('/login', { email, password });
-      const { name, role, token } = userData;
+      const userData = await loginPost('/login', { email, password });
+      const { name, role, token, id } = userData;
       const user = {
+        id,
         name,
         email,
         role,
