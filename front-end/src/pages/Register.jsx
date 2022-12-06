@@ -23,7 +23,8 @@ function Register() {
     e.preventDefault();
     try {
       await postUser('/register', { name, email, password, role: 'customer' });
-      history.push('/login');
+      localStorage.setItem('user', JSON.stringify({ name, email }));
+      history.push('customer/products');
     } catch (error) {
       const mensagem = error.response.data;
       setErrorMessage(mensagem);
