@@ -29,7 +29,6 @@ function Register() {
     } catch (error) {
       const mensagem = error.response.data;
       setErrorMessage(mensagem);
-      console.log('FRONTERROR', mensagem);
     }
   };
 
