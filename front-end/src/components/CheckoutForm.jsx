@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { apiPost, getProducts } from '../services/requests';
+import { apiPost, getData } from '../services/requests';
 
 export default function CheckoutForm() {
   const history = useHistory();
@@ -8,7 +8,7 @@ export default function CheckoutForm() {
   const [deliveryData, setDeliveryData] = useState({});
 
   useEffect(() => {
-    getProducts('/sellers')
+    getData('/sellers')
       .then((res) => {
         setSellers(res);
         setDeliveryData({ sellerId: res[0].id });
@@ -57,7 +57,12 @@ export default function CheckoutForm() {
       <form>
         <label htmlFor="p-vendedora">
           P.Vendedora Responsável
-          <select id="p-vendedora" name="sellerId" onClick={ handleChange }>
+          <select
+            id="p-vendedora"
+            data-testid="customer_checkout__select-seller"
+            name="sellerId"
+            onClick={ handleChange }
+          >
             {sellers.map((seller) => (
               <option key={ seller.id } value={ seller.id } name="sellerId">
                 {seller.name}
@@ -68,6 +73,7 @@ export default function CheckoutForm() {
         <label htmlFor="endereco">
           Endereço
           <input
+            data-testid="customer_checkout__input-address"
             type="text"
             placeholder="digite seu endereço"
             id="endereco"
@@ -78,6 +84,7 @@ export default function CheckoutForm() {
         <label htmlFor="numero">
           Número
           <input
+            data-testid="customer_checkout__input-address-number"
             type="text"
             placeholder="Número"
             id="numero"
@@ -85,7 +92,13 @@ export default function CheckoutForm() {
             onChange={ handleChange }
           />
         </label>
-        <button type="button" onClick={ sendOrder }> Finalizar Pedido </button>
+        <button
+          data-tetid="customer_checkout__button-submit-order"
+          type="button"
+          onClick={ sendOrder }
+        >
+          Finalizar Pedido
+        </button>
       </form>
     </div>
 
