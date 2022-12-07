@@ -6,6 +6,8 @@ import { apiGet, update } from '../services/requests';
 import getToken from '../utils/getToken';
 import TableOrdersDetails from '../components/TableOrdersDetails';
 import convertDate from '../utils/converteDate';
+import getRole from '../utils/getRole';
+import Button from '../components/Button';
 
 function CustomerOrdersDetails() {
   const history = useHistory();
@@ -17,9 +19,9 @@ function CustomerOrdersDetails() {
     return path[path.length - 1];
   };
 
-  const updateStatus = () => {
-    setOrder({ ...order, status: 'Entregue' });
-    update(`/orders/${getId()}`, { status: 'Entregue' }, getToken());
+  const updateStatus = (status) => {
+    setOrder({ ...order, status });
+    update(`/orders/${getId()}`, { status }, getToken());
   };
 
   useEffect(() => {
@@ -39,12 +41,17 @@ function CustomerOrdersDetails() {
             >
               {`PEDIDO: ${order.id}`}
             </p>
-            <p
-              data-testid="customer_
+            {
+              getRole() === 'customer'
+            && (
+              <p
+                data-testid="customer_
               order_details__element-order-details-label-seller-name"
-            >
-              {order.seller.name}
-            </p>
+              >
+                {order.seller.name}
+              </p>
+            )
+            }
             <p
               data-testid="customer_
               order_details__element-order-details-label-order-date"
@@ -57,14 +64,38 @@ function CustomerOrdersDetails() {
             >
               {order.status}
             </p>
-            <button
-              type="button"
-              data-testid="customer_
-              order_details__button-delivery-check"
-              onClick={ updateStatus }
-            >
-              MARCAR COMO ENTREGUE
-            </button>
+            { getRole() === 'customer'
+              ? (
+
+                <Button
+                  type="button"
+                  datatestid="customer_order_details__button-delivery-check"
+                  text="MARCAR COMO ENTREGUE"
+                  onClick={ () => updateStatus('Entregue') }
+                  disabled={ false }
+                />
+              )
+              : (
+
+                <div>
+                  <Button
+                    type="button"
+                    datatestid="seller_order_details__button-preparing-check"
+                    onClick={ () => updateStatus('Preparando') }
+                    text="PREPARAR PEDIDO"
+                    name="PREPARAR PEDIDO"
+                    disabled={ false }
+                  />
+                  <Button
+                    type="button"
+                    datatestid="seller_order_details__button-dispatch-check"
+                    onClick={ () => updateStatus('Em Trânsito') }
+                    text="SAIU PARA ENTREGA"
+                    name="SAIU PARA ENTREGA"
+                    disabled={ false }
+                  />
+                </div>
+              )}
           </div>
         )}
       <TableOrdersDetails />
