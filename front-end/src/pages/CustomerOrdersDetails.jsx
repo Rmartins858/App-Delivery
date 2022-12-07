@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import { apiGet, update } from '../services/requests';
 import getToken from '../utils/getToken';
 import TableOrdersDetails from '../components/TableOrdersDetails';
+import convertDate from '../utils/converteDate';
 
 function CustomerOrdersDetails() {
   const history = useHistory();
@@ -16,12 +17,6 @@ function CustomerOrdersDetails() {
     return path[path.length - 1];
   };
 
-  const convertDate = (data) => {
-    const now = new Date(data);
-    const str = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
-    return str;
-  };
-
   const updateStatus = () => {
     setOrder({ ...order, status: 'Entregue' });
     update(`/orders/${getId()}`, { status: 'Entregue' }, getToken());
@@ -30,7 +25,7 @@ function CustomerOrdersDetails() {
   useEffect(() => {
     apiGet(`/orders/${getId()}`, getToken()).then((res) => setOrder(res));
   }, []);
-  console.log(order);
+
   return (
     <div>
       <Header />
