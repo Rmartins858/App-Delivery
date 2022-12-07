@@ -50,35 +50,35 @@ function TableOrdersDetails() {
                   <tr key={ id }>
                     <td
                       data-testid={
-                        `customer_checkout__element-order-table-item-number-${index}`
+                        `customer_order_details__element-order-table-item-number-${index}`
                       }
                     >
                       { id }
                     </td>
                     <td
                       data-testid={
-                        `customer_checkout__element-order-table-name-${index}`
+                        `customer_order_details__element-order-table-name-${index}`
                       }
                     >
                       { name }
                     </td>
                     <td
                       data-testid={
-                        `customer_checkout__element-order-table-quantity-${index}`
+                        `customer_order_details__element-order-table-quantity-${index}`
                       }
                     >
                       { qty }
                     </td>
                     <td
                       data-testid={
-                        `customer_checkout__element-order-table-unit-price-${index}`
+                        `customer_order_details__element-order-table-unit-price-${index}`
                       }
                     >
                       { `R$ ${price}` }
                     </td>
                     <td
                       data-testid={
-                        `customer_checkout__element-order-table-sub-total-${index}`
+                        `customer_order_details__element-order-table-sub-total-${index}`
                       }
                     >
                       { `R$ ${(qty * price).toFixed(2)}`}
@@ -90,10 +90,13 @@ function TableOrdersDetails() {
           )
       }
       <div>
-        <h3
-          data-testid="customer_checkout__element-order-total-price"
-        >
-          {`Total: R$ ${getTotal()}`}
+        <h3>
+          Total: R$
+          <span
+            data-testid="customer_order_details__element-order-total-price"
+          >
+            {getTotal().toString().replace('.', ',')}
+          </span>
 
         </h3>
       </div>
