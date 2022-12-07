@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { apiGet } from '../services/requests';
 import getToken from '../utils/getToken';
 import convertDate from '../utils/converteDate';
+import getRole from '../utils/getRole';
 
 function OrdersCard() {
   const history = useHistory();
@@ -12,17 +13,31 @@ function OrdersCard() {
     apiGet('/orders', getToken()).then((res) => setOrders(res));
   }, []);
 
-  console.log(orders);
+  const handleClick = (id) => {
+    if (getRole() === 'seller') {
+      history.push(`/seller/orders/${id}`);
+    } else {
+      history.push(`/customer/orders/${id}`);
+    }
+  };
+
   return (
     <div>
       {
         !orders.length ? 'sem pedido  :('
           : (
-            orders.map(({ id, status, saleDate, totalPrice }) => (
+            orders.map(({
+              id,
+              status,
+              saleDate,
+              totalPrice,
+              deliveryAddress,
+              deliveryNumber,
+            }) => (
               <button
                 key={ id }
                 type="button"
-                onClick={ () => history.push(`/customer/orders/${id}`) }
+                onClick={ () => handleClick(id) }
               >
                 <div>
 
@@ -38,6 +53,13 @@ function OrdersCard() {
                   <p data-testid={ `customer_orders__element-card-price-${id}` }>
                     {`R$ ${totalPrice} `}
                   </p>
+                  { getRole() === 'seller' && (
+                    <p
+                      data-testid={ `seller_orders__element-card-address-${id}` }
+                    >
+                      {`${deliveryAddress}, ${deliveryNumber}`}
+                    </p>
+                  ) }
                 </div>
               </button>
             ))
