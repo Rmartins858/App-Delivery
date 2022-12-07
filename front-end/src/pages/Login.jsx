@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../components/Button';
 import Genericinput from '../components/Genericinput';
@@ -10,6 +10,29 @@ function Login() {
   const history = useHistory();
   const { email, password, setEmail, setPassword } = useContext(userContext);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const isLogged = () => {
+    if (localStorage.getItem('user')) {
+      const userData = JSON.parse(localStorage.getItem('user'));
+      switch (userData.role) {
+      case 'customer':
+        history.push('/customer/products');
+        break;
+      case 'seller':
+        history.push('/seller/orders');
+        break;
+      case 'administrator':
+        history.push('admin/manage');
+        break;
+      default:
+        break;
+      }
+    }
+  };
+
+  useEffect(() => {
+    isLogged();
+  }, []);
 
   const onLoginBtnClick = async (e) => {
     e.preventDefault();
