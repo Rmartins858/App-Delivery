@@ -42,7 +42,7 @@ export default function CheckoutForm() {
   const sendOrder = () => {
     const saleData = {
       ...deliveryData,
-      status: 'pendente',
+      status: 'Pendente',
       userId: getUserData().id,
       totalPrice: getTotal(),
     };
