@@ -12,6 +12,7 @@ import Button from '../components/Button';
 function CustomerOrdersDetails() {
   const history = useHistory();
   const [order, setOrder] = useState();
+  const datatest = 'customer_order_details__element-order-details-label';
 
   const getId = () => {
     const { pathname } = history.location;
@@ -37,7 +38,7 @@ function CustomerOrdersDetails() {
         : (
           <div>
             <p
-              data-testid="customer_order_details__element-order-details-label-order-id"
+              data-testid={ `${datatest}-order-id` }
             >
               {`PEDIDO: ${order.id}`}
             </p>
@@ -45,22 +46,19 @@ function CustomerOrdersDetails() {
               getRole() === 'customer'
             && (
               <p
-                data-testid="customer_
-              order_details__element-order-details-label-seller-name"
+                data-testid={ `${datatest}-seller-name` }
               >
                 {order.seller.name}
               </p>
             )
             }
             <p
-              data-testid="customer_
-              order_details__element-order-details-label-order-date"
+              data-testid={ `${datatest}-order-date` }
             >
               {convertDate(order.saleDate)}
             </p>
             <p
-              data-testid="customer_
-              order_details__element-order-details-label-delivery-status"
+              data-testid={ `${datatest}-delivery-status` }
             >
               {order.status}
             </p>
