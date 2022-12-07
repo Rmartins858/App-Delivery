@@ -35,6 +35,7 @@ function OrdersCard() {
               deliveryNumber,
             }) => (
               <button
+                data-testid={ `seller_orders__element-order-id-${id}` }
                 key={ id }
                 type="button"
                 onClick={ () => handleClick(id) }
