@@ -96,6 +96,7 @@ export default function CheckoutForm() {
           data-tetid="customer_checkout__button-submit-order"
           type="button"
           onClick={ sendOrder }
+          disabled={ !(deliveryData.deliveryAddress && deliveryData.deliveryNumber) }
         >
           Finalizar Pedido
         </button>

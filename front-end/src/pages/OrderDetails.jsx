@@ -72,7 +72,7 @@ function CustomerOrdersDetails() {
                   datatestid="customer_order_details__button-delivery-check"
                   text="MARCAR COMO ENTREGUE"
                   onClick={ () => updateStatus('Entregue') }
-                  disabled={ false }
+                  disabled={ order.status !== 'Em Trânsito' }
                 />
               )
               : (
@@ -84,7 +84,7 @@ function CustomerOrdersDetails() {
                     onClick={ () => updateStatus('Preparando') }
                     text="PREPARAR PEDIDO"
                     name="PREPARAR PEDIDO"
-                    disabled={ false }
+                    disabled={ order.status !== 'Pendente' }
                   />
                   <Button
                     type="button"
@@ -92,7 +92,7 @@ function CustomerOrdersDetails() {
                     onClick={ () => updateStatus('Em Trânsito') }
                     text="SAIU PARA ENTREGA"
                     name="SAIU PARA ENTREGA"
-                    disabled={ false }
+                    disabled={ order.status !== 'Preparando' }
                   />
                 </div>
               )}
