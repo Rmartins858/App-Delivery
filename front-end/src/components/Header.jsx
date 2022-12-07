@@ -33,7 +33,7 @@ function Header({ condition }) {
           />
         )}
         <span
-          data-testid="customer_products__element-navbar-link-products"
+          data-testid="customer_products__element-navbar-user-full-name"
         >
           { name }
         </span>
