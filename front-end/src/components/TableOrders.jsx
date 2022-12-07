@@ -27,7 +27,6 @@ function TableOrders() {
   return (
     <div>
       <h3> Finalizar Pedido </h3>
-
       {
         !cart.length ? 'sem pedido  :('
           : (
@@ -59,8 +58,7 @@ function TableOrders() {
                   <tr key={ id }>
                     <td
                       data-testid={
-                        `customer_checkout__element-order-table-item-number-
-                        ${index}`
+                        `customer_checkout__element-order-table-item-number-${index}`
                       }
                     >
                       { index + 1 }
