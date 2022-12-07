@@ -6,7 +6,7 @@ import TableOrders from '../components/TableOrders';
 function CustomerCheckout() {
   return (
     <div>
-      <Header />
+      <Header condition />
       <TableOrders />
       <CheckoutForm />
     </div>
