@@ -8,6 +8,7 @@ function Header({ condition }) {
 
   const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('carrinho');
     history.push('/login');
   };
 
