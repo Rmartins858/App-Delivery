@@ -4,14 +4,14 @@ import Button from '../components/Button';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import userContext from '../context/userContext';
-import { getProducts } from '../services/requests';
+import { getData } from '../services/requests';
 
 function CustomerProducts() {
   const history = useHistory();
   const { setProducts, products } = useContext(userContext);
   const [cartTotal, setCartToal] = useState(0);
   useEffect(() => {
-    getProducts('/products')
+    getData('/products')
       .then((res) => setProducts(res));
   }, []);
 
@@ -29,7 +29,7 @@ function CustomerProducts() {
 
   return (
     <div>
-      <Header />
+      <Header condition />
       {products.length && products.map((product) => (
         <ProductCard
           key={ product.id }

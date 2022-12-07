@@ -1,7 +1,8 @@
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Button from './Button';
 
-function Header() {
+function Header({ condition }) {
   const history = useHistory();
   const { name } = JSON.parse(localStorage.getItem('user'));
 
@@ -21,14 +22,16 @@ function Header() {
           disabled={ false }
           onClick={ () => { history.push('/customer/products'); } }
         />
-        <Button
-          datatestid="customer_products__element-navbar-link-orders"
-          type="button"
-          text="Meus Pedidos"
-          name="orders"
-          disabled={ false }
-          onClick={ () => { history.push('/customer/orders'); } }
-        />
+        { condition && (
+          <Button
+            datatestid="customer_products__element-navbar-link-orders"
+            type="button"
+            text="Meus Pedidos"
+            name="orders"
+            disabled={ false }
+            onClick={ () => { history.push('/customer/orders'); } }
+          />
+        )}
         <span
           data-testid="customer_products__element-navbar-link-products"
         >
@@ -46,5 +49,9 @@ function Header() {
     </header>
   );
 }
+
+Header.propTypes = {
+  condition: PropTypes.bool.isRequired,
+};
 
 export default Header;

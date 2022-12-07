@@ -8,7 +8,7 @@ class SaleController {
   async getAll(req, res, next) {
     try {
       const { userId, userRole } = req;
-      const user = userRole === 'seller' ? 'sellerId' : 'userID';
+      const user = userRole === 'seller' ? 'sellerId' : 'userId';
       const data = {
         [user]: userId,
       };
@@ -16,6 +16,7 @@ class SaleController {
 
       return res.status(200).json(allOrders);
     } catch (e) {
+      console.log(e.message);
       next(e);
     }
   }

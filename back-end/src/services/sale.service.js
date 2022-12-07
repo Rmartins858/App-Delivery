@@ -45,7 +45,7 @@ class SaleService {
       ),
     );
     
-    return id
+    return id;
   }
 
   async update(id, status) {

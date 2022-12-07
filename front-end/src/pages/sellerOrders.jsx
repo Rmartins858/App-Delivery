@@ -2,13 +2,15 @@ import React from 'react';
 import Header from '../components/Header';
 import OrdersCard from '../components/OrdersCard';
 
-function CustomerOrders() {
+function sellerOrders() {
   return (
     <div>
-      <Header condition />
+      <Header
+        condition={ false }
+      />
       <OrdersCard />
     </div>
   );
 }
 
-export default CustomerOrders;
+export default sellerOrders;
