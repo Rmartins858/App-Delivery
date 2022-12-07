@@ -29,7 +29,7 @@ function CustomerProducts() {
 
   return (
     <div>
-      <Header />
+      <Header condition />
       {products.length && products.map((product) => (
         <ProductCard
           key={ product.id }
