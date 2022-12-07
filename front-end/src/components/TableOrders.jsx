@@ -21,7 +21,7 @@ function TableOrders() {
     cart.reduce((acc, curr) => {
       acc += (curr.qty * curr.price);
       return acc;
-    }, 0).toFixed(2)
+    }, 0).toFixed(2).toString().replace('.', ',')
   );
 
   return (
@@ -78,19 +78,25 @@ function TableOrders() {
                     >
                       { qty }
                     </td>
-                    <td
-                      data-testid={
-                        `customer_checkout__element-order-table-unit-price-${index}`
-                      }
-                    >
-                      { `R$ ${price}` }
+                    <td>
+                      R$
+                      <span
+                        data-testid={
+                          `customer_checkout__element-order-table-unit-price-${index}`
+                        }
+                      >
+                        {price.toString().replace('.', ',')}
+                      </span>
                     </td>
-                    <td
-                      data-testid={
-                        `customer_checkout__element-order-table-sub-total-${index}`
-                      }
-                    >
-                      { `R$ ${(qty * price).toFixed(2)}`}
+                    <td>
+                      R$
+                      <span
+                        data-testid={
+                          `customer_checkout__element-order-table-sub-total-${index}`
+                        }
+                      >
+                        {(qty * price).toFixed(2).toString().replace('.', ',')}
+                      </span>
                     </td>
                     <td>
                       <button
@@ -112,10 +118,13 @@ function TableOrders() {
           )
       }
       <div>
-        <h3
-          data-testid="customer_checkout__element-order-total-price"
-        >
-          {`Total: R$ ${getTotal()}`}
+        <h3>
+          Total: R$
+          <span
+            data-testid="customer_checkout__element-order-total-price"
+          >
+            {getTotal()}
+          </span>
 
         </h3>
       </div>
