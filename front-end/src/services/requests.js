@@ -14,7 +14,17 @@ export async function apiPost(endpoint, body, token) {
   return data;
 }
 
-export async function getProducts(endpoint) {
+export async function getData(endpoint) {
   const { data } = await api.get(endpoint);
+  return data;
+}
+
+export async function apiGet(endpoint, token) {
+  const { data } = await api.get(endpoint, { headers: { authorization: token } });
+  return data;
+}
+
+export async function update(endpoint, body, token) {
+  const { data } = await api.put(endpoint, body, { headers: { authorization: token } });
   return data;
 }
