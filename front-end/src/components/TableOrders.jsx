@@ -59,10 +59,11 @@ function TableOrders() {
                   <tr key={ id }>
                     <td
                       data-testid={
-                        `customer_checkout__element-order-table-item-number-${index}`
+                        `customer_checkout__element-order-table-item-number-
+                        ${index}`
                       }
                     >
-                      { id }
+                      { index + 1 }
                     </td>
                     <td
                       data-testid={
