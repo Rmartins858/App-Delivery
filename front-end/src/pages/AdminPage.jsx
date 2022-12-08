@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminRegister from '../components/AdminRegister';
 import Header from '../components/Header';
 import TableUsers from '../components/TableUsers';
-import { apiGet, apiRemove, loginPost } from '../services/requests';
+import { apiGet, apiRemove, apiPost } from '../services/requests';
 import getToken from '../utils/getToken';
 
 function AdminPage() {
@@ -37,8 +37,7 @@ function AdminPage() {
   const createUser = async (e) => {
     e.preventDefault();
     try {
-      await loginPost('/register', newUserData);
-      setNewUserData(userDataEx);
+      await apiPost('/admregister', newUserData, getToken());
       getUsers();
     } catch (error) {
       const mensagem = error.response.data;

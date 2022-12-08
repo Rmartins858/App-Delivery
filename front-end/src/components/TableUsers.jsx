@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 function TableUsers({ usersList, deleteUser }) {
+  const datatestid = 'admin_manage__element-user-table-';
   return (
     <div>
       <table>
@@ -28,41 +29,29 @@ function TableUsers({ usersList, deleteUser }) {
           {usersList.length && usersList.map(({ name, id, email, role }, index) => (
             <tr key={ id }>
               <td
-                data-testid={
-                  `admin_manage__element-user-table-item-number-${index}`
-                }
+                data-testid={ `${datatestid}item-number-${index}` }
               >
                 { index + 1 }
               </td>
               <td
-                data-testid={
-                  `admin_manage__element-user-table-name-${index}`
-                }
+                data-testid={ `${datatestid}name-${index}` }
               >
                 { name }
               </td>
               <td
-                data-testid={
-                  `admin_manage__element-user-table-email-${index}`
-                }
+                data-testid={ `${datatestid}email-${index}` }
               >
                 { email }
               </td>
               <td>
-                <span
-                  data-testid={
-                    `admin_manage__element-user-table-role-${index}`
-                  }
-                >
-                  {role}
+                <span data-testid={ `${datatestid}role-${index}` }>
+                  { role }
                 </span>
               </td>
               <td>
                 <button
                   type="button"
-                  data-testid={
-                    `admin_manage__element-user-table-remove-${index}`
-                  }
+                  data-testid={ `${datatestid}remove-${index}` }
                   onClick={
                     () => deleteUser(id)
                   }

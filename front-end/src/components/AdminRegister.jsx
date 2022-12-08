@@ -41,7 +41,7 @@ function AdminRegister({ errorMessage, setNewUserData, createUser, newUserData }
         data-testid="admin_manage__select-role"
         name="role"
       >
-        <option value="seller">Vendedor</option>
+        <option value="seller" selected>Vendedor</option>
         <option value="customer">Customer</option>
         <option value="administrator">Administrator</option>
       </select>
