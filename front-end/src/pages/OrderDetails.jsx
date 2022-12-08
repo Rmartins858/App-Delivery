@@ -12,7 +12,7 @@ import Button from '../components/Button';
 function CustomerOrdersDetails() {
   const history = useHistory();
   const [order, setOrder] = useState();
-  const datatest = 'customer_order_details__element-order-details-label';
+  const datatest = `${getRole()}_order_details__element-order-details-label`;
 
   const getId = () => {
     const { pathname } = history.location;

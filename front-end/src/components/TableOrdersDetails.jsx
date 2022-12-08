@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import getRole from '../utils/getRole';
 
 function TableOrdersDetails() {
   const [cart, setCart] = useState([]);
+  const datatest = `${getRole()}_order_details__element-order-table`;
 
   const getCart = () => {
     setCart(JSON.parse(localStorage.getItem('carrinho')) || []);
@@ -15,7 +17,7 @@ function TableOrdersDetails() {
     cart.reduce((acc, curr) => {
       acc += (curr.qty * curr.price);
       return acc;
-    }, 0).toFixed(2)
+    }, 0).toFixed(2).toString().replace('.', ',')
   );
 
   return (
@@ -50,35 +52,35 @@ function TableOrdersDetails() {
                   <tr key={ id }>
                     <td
                       data-testid={
-                        `customer_order_details__element-order-table-item-number-${index}`
+                        `${datatest}-item-number-${index}`
                       }
                     >
                       { id }
                     </td>
                     <td
                       data-testid={
-                        `customer_order_details__element-order-table-name-${index}`
+                        `${datatest}-name-${index}`
                       }
                     >
                       { name }
                     </td>
                     <td
                       data-testid={
-                        `customer_order_details__element-order-table-quantity-${index}`
+                        `${datatest}-quantity-${index}`
                       }
                     >
                       { qty }
                     </td>
                     <td
                       data-testid={
-                        `customer_order_details__element-order-table-unit-price-${index}`
+                        `${datatest}-unit-price-${index}`
                       }
                     >
                       { `R$ ${price}` }
                     </td>
                     <td
                       data-testid={
-                        `customer_order_details__element-order-table-sub-total-${index}`
+                        `${datatest}-sub-total-${index}`
                       }
                     >
                       { `R$ ${(qty * price).toFixed(2)}`}
@@ -93,9 +95,9 @@ function TableOrdersDetails() {
         <h3>
           Total: R$
           <span
-            data-testid="customer_order_details__element-order-total-price"
+            data-testid={ `${getRole()}_order_details__element-order-total-price` }
           >
-            {getTotal().toString().replace('.', ',')}
+            {getTotal()}
           </span>
 
         </h3>
