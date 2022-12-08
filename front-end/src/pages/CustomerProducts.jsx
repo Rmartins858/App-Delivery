@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from '../components/Button';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import userContext from '../context/userContext';
@@ -29,7 +28,7 @@ function CustomerProducts() {
 
   return (
     <div>
-      <Header condition />
+      <Header />
       {products.length && products.map((product) => (
         <ProductCard
           key={ product.id }
@@ -41,14 +40,19 @@ function CustomerProducts() {
           product={ getQty().find((prod) => prod.name === product.name) || 0 }
         />
       ))}
-      <Button
-        datatestid=""
+      <button
+        data-testid="customer_products__button-cart"
         type="button"
-        name="preview carrinho"
-        disabled={ false }
         onClick={ goToCart }
-        text={ `Ver carrinho: R$ ${cartTotal.toFixed(2)}` }
-      />
+        disabled={ cartTotal === 0 }
+      >
+        Ver carrinho: R$
+        <span
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          {cartTotal.toFixed(2).toString().replace('.', ',')}
+        </span>
+      </button>
     </div>
   );
 }

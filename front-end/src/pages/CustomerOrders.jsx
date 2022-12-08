@@ -5,7 +5,7 @@ import OrdersCard from '../components/OrdersCard';
 function CustomerOrders() {
   return (
     <div>
-      <Header condition />
+      <Header />
       <OrdersCard />
     </div>
   );

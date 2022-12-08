@@ -93,7 +93,7 @@ export default function CheckoutForm() {
           />
         </label>
         <button
-          data-tetid="customer_checkout__button-submit-order"
+          data-testid="customer_checkout__button-submit-order"
           type="button"
           onClick={ sendOrder }
         >

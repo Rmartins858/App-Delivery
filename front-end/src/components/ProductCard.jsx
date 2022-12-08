@@ -61,8 +61,11 @@ function ProductCard({ price, urlImage, name, id, updateTotal, product }) {
 
   return (
     <div data-testid="">
-      <p data-testid={ `customer_products__element-card-price-${id}` }>
-        {`R$ ${price}`}
+      <p>
+        R$
+        <span data-testid={ `customer_products__element-card-price-${id}` }>
+          { price.replace('.', ',') }
+        </span>
       </p>
       <img
         data-testid={ `customer_products__img-card-bg-image-${id}` }
@@ -83,7 +86,7 @@ function ProductCard({ price, urlImage, name, id, updateTotal, product }) {
         -
       </button>
       <input
-        datatestid={ `customer_products__input-card-quantity-${id}` }
+        data-testid={ `customer_products__input-card-quantity-${id}` }
         type="number"
         placeholder="0"
         value={ qty }

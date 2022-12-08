@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { apiGet } from '../services/requests';
+import getRole from '../utils/getRole';
+import getToken from '../utils/getToken';
 
 function TableOrdersDetails() {
-  const [cart, setCart] = useState([]);
+  const history = useHistory();
 
-  const getCart = () => {
-    setCart(JSON.parse(localStorage.getItem('carrinho')) || []);
+  const [cart, setCart] = useState([]);
+  const datatest = `${getRole()}_order_details__element-order-table`;
+
+  const getId = () => {
+    const { pathname } = history.location;
+    const path = pathname.split('/');
+    return path[path.length - 1];
   };
 
   useEffect(() => {
-    getCart();
+    apiGet(`/orders/${getId()}`, getToken()).then((res) => setCart(res.products));
   }, []);
 
   const getTotal = () => (
     cart.reduce((acc, curr) => {
-      acc += (curr.qty * curr.price);
+      acc += (curr.SalesProduct.quantity * curr.price);
       return acc;
-    }, 0).toFixed(2)
+    }, 0).toFixed(2).toString().replace('.', ',')
   );
 
   return (
@@ -46,54 +55,65 @@ function TableOrdersDetails() {
                 </tr>
               </thead>
               <tbody>
-                {cart.length && cart.map(({ name, id, qty, price }, index) => (
-                  <tr key={ id }>
-                    <td
-                      data-testid={
-                        `customer_checkout__element-order-table-item-number-${index}`
-                      }
-                    >
-                      { id }
-                    </td>
-                    <td
-                      data-testid={
-                        `customer_checkout__element-order-table-name-${index}`
-                      }
-                    >
-                      { name }
-                    </td>
-                    <td
-                      data-testid={
-                        `customer_checkout__element-order-table-quantity-${index}`
-                      }
-                    >
-                      { qty }
-                    </td>
-                    <td
-                      data-testid={
-                        `customer_checkout__element-order-table-unit-price-${index}`
-                      }
-                    >
-                      { `R$ ${price}` }
-                    </td>
-                    <td
-                      data-testid={
-                        `customer_checkout__element-order-table-sub-total-${index}`
-                      }
-                    >
-                      { `R$ ${(qty * price).toFixed(2)}`}
-                    </td>
-                  </tr>
-                ))}
+                {cart.length && cart
+                  .map(({ name, id, SalesProduct: { quantity }, price }, index) => (
+                    <tr key={ id }>
+                      <td
+                        data-testid={
+                          `${datatest}-item-number-${index}`
+                        }
+                      >
+                        { id }
+                      </td>
+                      <td
+                        data-testid={
+                          `${datatest}-name-${index}`
+                        }
+                      >
+                        { name }
+                      </td>
+                      <td
+                        data-testid={
+                          `${datatest}-quantity-${index}`
+                        }
+                      >
+                        { quantity }
+                      </td>
+                      <td>
+                        R$
+                        <span
+                          data-testid={
+                            `${datatest}-unit-price-${index}`
+                          }
+                        >
+                          {price.toString().replace('.', ',')}
+                        </span>
+                      </td>
+                      <td>
+                        <span
+                          data-testid={
+                            `${datatest}-sub-total-${index}`
+                          }
+                        >
+                          R$
+                          {(quantity * price)
+                            .toFixed(2).toString().replace('.', ',')}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           )
       }
       <div>
-        <h3
-          data-testid="customer_checkout__element-order-total-price"
-        >
-          {`Total: R$ ${getTotal()}`}
+        <h3>
+          Total: R$
+          <span
+            data-testid={ `${getRole()}_order_details__element-order-total-price` }
+          >
+            {getTotal()}
+          </span>
 
         </h3>
       </div>

@@ -12,6 +12,7 @@ import Button from '../components/Button';
 function CustomerOrdersDetails() {
   const history = useHistory();
   const [order, setOrder] = useState();
+  const datatest = `${getRole()}_order_details__element-order-details-label`;
 
   const getId = () => {
     const { pathname } = history.location;
@@ -30,14 +31,14 @@ function CustomerOrdersDetails() {
 
   return (
     <div>
-      <Header condition />
+      <Header />
       <h3>Detalhe do Pedido</h3>
       {!order
         ? 'loading...'
         : (
           <div>
             <p
-              data-testid="customer_order_details__element-order-details-label-order-id"
+              data-testid={ `${datatest}-order-id` }
             >
               {`PEDIDO: ${order.id}`}
             </p>
@@ -45,22 +46,19 @@ function CustomerOrdersDetails() {
               getRole() === 'customer'
             && (
               <p
-                data-testid="customer_
-              order_details__element-order-details-label-seller-name"
+                data-testid={ `${datatest}-seller-name` }
               >
                 {order.seller.name}
               </p>
             )
             }
             <p
-              data-testid="customer_
-              order_details__element-order-details-label-order-date"
+              data-testid={ `${datatest}-order-date` }
             >
               {convertDate(order.saleDate)}
             </p>
             <p
-              data-testid="customer_
-              order_details__element-order-details-label-delivery-status"
+              data-testid={ `${datatest}-delivery-status` }
             >
               {order.status}
             </p>
@@ -71,8 +69,9 @@ function CustomerOrdersDetails() {
                   type="button"
                   datatestid="customer_order_details__button-delivery-check"
                   text="MARCAR COMO ENTREGUE"
+                  name="MARCAR COMO ENTREGUE"
                   onClick={ () => updateStatus('Entregue') }
-                  disabled={ false }
+                  disabled={ order.status !== 'Em Trânsito' }
                 />
               )
               : (
@@ -84,7 +83,7 @@ function CustomerOrdersDetails() {
                     onClick={ () => updateStatus('Preparando') }
                     text="PREPARAR PEDIDO"
                     name="PREPARAR PEDIDO"
-                    disabled={ false }
+                    disabled={ order.status !== 'Pendente' }
                   />
                   <Button
                     type="button"
@@ -92,7 +91,7 @@ function CustomerOrdersDetails() {
                     onClick={ () => updateStatus('Em Trânsito') }
                     text="SAIU PARA ENTREGA"
                     name="SAIU PARA ENTREGA"
-                    disabled={ false }
+                    disabled={ order.status !== 'Preparando' }
                   />
                 </div>
               )}

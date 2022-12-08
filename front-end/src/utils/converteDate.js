@@ -1,7 +1,11 @@
 const convertDate = (data) => {
-  const now = new Date(data);
-  const str = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
-  return str;
+  const options = {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+  };
+  const now = new Date(data).toLocaleString('pt-BR', options);
+  return now;
 };
 
 export default convertDate;

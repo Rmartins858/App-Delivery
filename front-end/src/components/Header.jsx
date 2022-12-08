@@ -1,39 +1,42 @@
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Button from './Button';
+import getRole from '../utils/getRole';
 
-function Header({ condition }) {
+function Header() {
   const history = useHistory();
   const { name } = JSON.parse(localStorage.getItem('user'));
 
   const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('carrinho');
     history.push('/login');
   };
 
   return (
     <header>
       <nav>
+        {
+          getRole() === 'customer' && (
+            <Button
+              datatestid="customer_products__element-navbar-link-products"
+              type="button"
+              text="Produtos"
+              name="orders"
+              disabled={ false }
+              onClick={ () => { history.push('/customer/products'); } }
+            />
+          )
+        }
         <Button
-          datatestid="customer_products__element-navbar-link-products"
+          datatestid="customer_products__element-navbar-link-orders"
           type="button"
-          text="Produtos"
+          text={ getRole() === 'customer' ? 'Meus pedidos' : 'Pedidos' }
           name="orders"
           disabled={ false }
-          onClick={ () => { history.push('/customer/products'); } }
+          onClick={ () => { history.push(`/${getRole()}/orders`); } }
         />
-        { condition && (
-          <Button
-            datatestid="customer_products__element-navbar-link-orders"
-            type="button"
-            text="Meus Pedidos"
-            name="orders"
-            disabled={ false }
-            onClick={ () => { history.push('/customer/orders'); } }
-          />
-        )}
         <span
-          data-testid="customer_products__element-navbar-link-products"
+          data-testid="customer_products__element-navbar-user-full-name"
         >
           { name }
         </span>
@@ -49,9 +52,5 @@ function Header({ condition }) {
     </header>
   );
 }
-
-Header.propTypes = {
-  condition: PropTypes.bool.isRequired,
-};
 
 export default Header;
