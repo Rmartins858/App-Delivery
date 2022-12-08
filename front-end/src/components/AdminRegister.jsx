@@ -6,7 +6,7 @@ import { loginPost } from '../services/requests';
 function AdminRegister() {
   const userDataEx = {
     name: '',
-    role: '',
+    role: 'seller',
     email: '',
     password: '',
   };
