@@ -50,6 +50,22 @@ class UserService {
     
     return sellers;
   }
+
+  async getUsers() {
+    const sellers = await this.model.findAll({
+      where: {
+        [Op.or]: [
+          { role: 'seller' },
+          { role: 'customer' },
+        ],
+      },
+    });
+    return sellers;
+  }
+
+  async deleteUser(id) {
+    await this.model.destroy({ where: { id } });
+  }
 }
 
 module.exports = UserService;

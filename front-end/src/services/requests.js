@@ -28,3 +28,8 @@ export async function update(endpoint, body, token) {
   const { data } = await api.put(endpoint, body, { headers: { authorization: token } });
   return data;
 }
+
+export async function apiRemove(endpoint, token) {
+  const { data } = await api.delete(endpoint, { headers: { authorization: token } });
+  return data;
+}

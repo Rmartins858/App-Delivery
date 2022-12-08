@@ -27,14 +27,26 @@ function Header() {
             />
           )
         }
-        <Button
-          datatestid="customer_products__element-navbar-link-orders"
-          type="button"
-          text={ getRole() === 'customer' ? 'Meus pedidos' : 'Pedidos' }
-          name="orders"
-          disabled={ false }
-          onClick={ () => { history.push(`/${getRole()}/orders`); } }
-        />
+        {
+          getRole() !== 'administrator' ? (
+            <Button
+              datatestid="customer_products__element-navbar-link-orders"
+              type="button"
+              text={ getRole() === 'customer' ? 'Meus pedidos' : 'Pedidos' }
+              name="orders"
+              disabled={ false }
+              onClick={ () => { history.push(`/${getRole()}/orders`); } }
+            />
+          )
+            : (
+              <button
+                type="button"
+                data-testid="customer_products__element-navbar-link-orders"
+              >
+                GERENCIAR USUÁRIOS
+              </button>
+            )
+        }
         <span
           data-testid="customer_products__element-navbar-user-full-name"
         >
