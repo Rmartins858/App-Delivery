@@ -50,6 +50,11 @@ class UserService {
     
     return sellers;
   }
+
+  async getUsers() {
+    const sellers = await this.model.findAll();
+    return sellers;
+  }
 }
 
 module.exports = UserService;
