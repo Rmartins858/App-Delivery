@@ -65,7 +65,7 @@ function Register() {
         datatestid="common_register__button-register"
         type="submit"
         name="register"
-        disabled={ checkRegister(email, password, name) }
+        disabled={ checkRegister({ email, password, name }) }
         onClick={ onRegisterBtnClick }
         text="Cadastrar"
       />
