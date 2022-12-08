@@ -55,6 +55,10 @@ class UserService {
     const sellers = await this.model.findAll();
     return sellers;
   }
+
+  async deleteUser(id) {
+    await this.model.destroy({where: {id}});
+  }
 }
 
 module.exports = UserService;
