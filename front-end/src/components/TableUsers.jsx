@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { apiGet, apiRemove } from '../services/requests';
-import getToken from '../utils/getToken';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-function TableUsers() {
-  const [usersList, setUsersList] = useState([]);
-
-  const getUsers = () => {
-    apiGet('/users', getToken())
-      .then((res) => setUsersList(res));
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const deleteUser = (id) => {
-    try {
-      apiRemove(`/users/${id}`, getToken())
-        .then(() => getUsers());
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
+function TableUsers({ usersList, deleteUser }) {
   return (
     <div>
       <table>
@@ -98,5 +77,10 @@ function TableUsers() {
     </div>
   );
 }
+
+TableUsers.propTypes = {
+  deleteUser: PropTypes.func,
+  usersList: PropTypes.shape({}),
+}.isRequired;
 
 export default TableUsers;

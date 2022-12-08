@@ -1,28 +1,9 @@
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Button from './Button';
 import { checkRegister } from '../utils/checkLogin';
-import { loginPost } from '../services/requests';
 
-function AdminRegister() {
-  const userDataEx = {
-    name: '',
-    role: 'seller',
-    email: '',
-    password: '',
-  };
-
-  const [errorMessage, setErrorMessage] = useState('');
-  const [newUserData, setNewUserData] = useState(userDataEx);
-
-  const createUser = async () => {
-    try {
-      await loginPost('/register', newUserData);
-    } catch (error) {
-      const mensagem = error.response.data;
-      setErrorMessage(mensagem);
-    }
-  };
-
+function AdminRegister({ errorMessage, setNewUserData, createUser, newUserData }) {
   const handleChange = ({ target: { name, value } }) => {
     setNewUserData((prevState) => ({ ...prevState, [name]: value }));
   };
@@ -32,6 +13,7 @@ function AdminRegister() {
       <input
         type="text"
         name="name"
+        value={ newUserData.name }
         placeholder="Seu nome"
         onChange={ handleChange }
         data-testid="admin_manage__input-name"
@@ -40,6 +22,7 @@ function AdminRegister() {
       <input
         type="email"
         name="email"
+        value={ newUserData.email }
         placeholder="example@exemplo.com"
         onChange={ handleChange }
         data-testid="admin_manage__input-email"
@@ -48,6 +31,7 @@ function AdminRegister() {
       <input
         type="password"
         name="password"
+        value={ newUserData.password }
         placeholder="Min. 6 digítos"
         onChange={ handleChange }
         data-testid="admin_manage__input-password"
@@ -77,5 +61,11 @@ function AdminRegister() {
     </form>
   );
 }
+
+AdminRegister.propTypes = {
+  createUser: PropTypes.func,
+  errorMessage: PropTypes.string,
+  setNewUserData: PropTypes.func,
+}.isRequired;
 
 export default AdminRegister;
