@@ -54,7 +54,7 @@ function AdminRegister() {
       />
       <select
         onClick={ handleChange }
-        data-testid="admin_manage__select_role"
+        data-testid="admin_manage__select-role"
         name="role"
       >
         <option value="seller">Vendedor</option>
