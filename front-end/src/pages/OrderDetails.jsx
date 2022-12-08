@@ -69,6 +69,7 @@ function CustomerOrdersDetails() {
                   type="button"
                   datatestid="customer_order_details__button-delivery-check"
                   text="MARCAR COMO ENTREGUE"
+                  name="MARCAR COMO ENTREGUE"
                   onClick={ () => updateStatus('Entregue') }
                   disabled={ order.status !== 'Em Trânsito' }
                 />
