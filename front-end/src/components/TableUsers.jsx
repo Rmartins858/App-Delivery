@@ -1,5 +1,5 @@
-import React from 'react';
-import { apiGet, update } from '../services/requests';
+import React, { useState, useEffect } from 'react';
+import { apiGet, apiRemove } from '../services/requests';
 import getToken from '../utils/getToken';
 
 function TableUsers() {
@@ -16,9 +16,9 @@ function TableUsers() {
 
   const deleteUser = (id) => {
     try {
-      update(`/users/${id}`);
-      getUsers();
-    } catch (error) {
+      apiRemove(`/users/${id}`, getToken())
+        .then(() => getUsers());
+    } catch (e) {
       console.log(e.message);
     }
   };
