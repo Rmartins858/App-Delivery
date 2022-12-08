@@ -61,7 +61,9 @@ export default function CheckoutForm() {
             id="p-vendedora"
             data-testid="customer_checkout__select-seller"
             name="sellerId"
+            value={ deliveryData.sellerId }
             onClick={ handleChange }
+            onChange={ handleChange }
           >
             {sellers.map((seller) => (
               <option key={ seller.id } value={ seller.id } name="sellerId">
@@ -78,6 +80,7 @@ export default function CheckoutForm() {
             placeholder="digite seu endereço"
             id="endereco"
             name="deliveryAddress"
+            value={ deliveryData.deliveryAddress }
             onChange={ handleChange }
           />
         </label>
@@ -89,6 +92,7 @@ export default function CheckoutForm() {
             placeholder="Número"
             id="numero"
             name="deliveryNumber"
+            value={ deliveryData.deliveryNumber }
             onChange={ handleChange }
           />
         </label>
