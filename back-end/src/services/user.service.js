@@ -56,15 +56,15 @@ class UserService {
       where: {
         [Op.or]: [
           { role: 'seller' },
-          { role: 'customer' }
-        ]
-      }
+          { role: 'customer' },
+        ],
+      },
     });
     return sellers;
   }
 
   async deleteUser(id) {
-    await this.model.destroy({where: {id}});
+    await this.model.destroy({ where: { id } });
   }
 }
 

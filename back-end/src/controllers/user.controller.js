@@ -50,7 +50,7 @@ class UserController {
       const users = await this.service.getUsers();
       return res.status(200).json(users);
     } catch (e) {
-      console.log(e.message)
+      console.log(e.message);
       next(e);
     }
   }
@@ -58,10 +58,10 @@ class UserController {
   async deleteUser(req, res, next) {
     try {
       const { id } = req.params;
-      await this.service.deleteUser(id)
-      return res.status(204).json({message: 'User deleted!'})
+      await this.service.deleteUser(id);
+      return res.status(204).json({ message: 'User deleted!' });
     } catch (e) {
-      next(e)
+      next(e);
     }
   }
 }
