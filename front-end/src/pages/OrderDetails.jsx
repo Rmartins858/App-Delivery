@@ -31,7 +31,7 @@ function CustomerOrdersDetails() {
 
   return (
     <div>
-      <Header condition />
+      <Header />
       <h3>Detalhe do Pedido</h3>
       {!order
         ? 'loading...'

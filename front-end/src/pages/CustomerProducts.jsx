@@ -28,7 +28,7 @@ function CustomerProducts() {
 
   return (
     <div>
-      <Header condition />
+      <Header />
       {products.length && products.map((product) => (
         <ProductCard
           key={ product.id }
