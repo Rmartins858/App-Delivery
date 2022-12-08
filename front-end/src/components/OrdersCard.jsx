@@ -51,8 +51,13 @@ function OrdersCard() {
                   <p data-testid={ `${getRole()}_orders__element-order-date-${id}` }>
                     {convertDate(saleDate)}
                   </p>
-                  <p data-testid={ `${getRole()}_orders__element-card-price-${id}` }>
-                    {`R$ ${totalPrice} `}
+                  <p>
+                    R$
+                    <span
+                      data-testid={ `${getRole()}_orders__element-card-price-${id}` }
+                    >
+                      {totalPrice.toString().replace('.', ',')}
+                    </span>
                   </p>
                   { getRole() === 'seller' && (
                     <p
