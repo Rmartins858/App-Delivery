@@ -14,8 +14,7 @@ function AdminRegister() {
   const [errorMessage, setErrorMessage] = useState('');
   const [newUserData, setNewUserData] = useState(userDataEx);
 
-  const onRegisterBtnClick = async (e) => {
-    e.preventDefault();
+  const createUser = async () => {
     try {
       await loginPost('/register', newUserData);
     } catch (error) {
@@ -68,7 +67,7 @@ function AdminRegister() {
         type="submit"
         name="register"
         disabled={ checkRegister(newUserData) }
-        onClick={ onRegisterBtnClick }
+        onClick={ createUser }
         text="CADASTRAR"
       />
 
