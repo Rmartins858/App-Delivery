@@ -29,7 +29,7 @@ export async function update(endpoint, body, token) {
   return data;
 }
 
-export async function remove(endpoint, token) {
+export async function apiRemove(endpoint, token) {
   const { data } = await api.delete(endpoint, { headers: { authorization: token } });
   return data;
 }
