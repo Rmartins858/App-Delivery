@@ -52,7 +52,14 @@ class UserService {
   }
 
   async getUsers() {
-    const sellers = await this.model.findAll();
+    const sellers = await this.model.findAll({
+      where: {
+        [Op.or]: [
+          { role: 'seller' },
+          { role: 'customer' }
+        ]
+      }
+    });
     return sellers;
   }
 
