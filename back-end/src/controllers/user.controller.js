@@ -50,7 +50,18 @@ class UserController {
       const users = await this.service.getUsers();
       return res.status(200).json(users);
     } catch (e) {
+      console.log(e.message)
       next(e);
+    }
+  }
+
+  async deleteUser(req, res, next) {
+    try {
+      const { id } = req.params;
+      await this.service.deleteUser(id)
+      return res.status(203).json({message: 'User deleted!'})
+    } catch (e) {
+      next(e)
     }
   }
 }
