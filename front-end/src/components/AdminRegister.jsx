@@ -55,7 +55,7 @@ function AdminRegister({ errorMessage, setNewUserData, createUser, newUserData }
         text="CADASTRAR"
       />
 
-      <span data-testid="admin_manage__element-invalid_register">
+      <span data-testid="admin_manage__element-invalid-register">
         { errorMessage }
       </span>
     </form>
