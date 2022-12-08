@@ -6,9 +6,9 @@ function AdminPage() {
   return (
     <div>
       <Header />
-      <AdminRegister />
       <div>
         <h2>Cadastrar novo usuário</h2>
+        <AdminRegister />
       </div>
     </div>
   );
