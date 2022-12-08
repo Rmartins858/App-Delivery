@@ -18,5 +18,5 @@ router.post('/login', (req, res, next) => userController.login(req, res, next));
 router.post('/register', (req, res, next) => userController.register(req, res, next));
 router.post('/orders', JWT, (req, res, next) => saleController.create(req, res, next));
 router.put('/orders/:id', JWT, (req, res, next) => saleController.update(req, res, next));
-
+router.delete('/users/:id', JWT, (req, res, next) => userController.deleteUser(req, res, next));
 module.exports = router;
