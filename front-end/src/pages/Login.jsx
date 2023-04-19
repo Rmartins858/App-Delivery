@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../components/Button';
-import Genericinput from '../components/Genericinput';
+// import Genericinput from '../components/Genericinput';
 import userContext from '../context/userContext';
 import { checkLogin } from '../utils/checkLogin';
 import { loginPost } from '../services/requests';
+// import './Login.css';
 
 function Login() {
   const history = useHistory();
@@ -60,22 +61,40 @@ function Login() {
 
   return (
     <form>
-      <Genericinput
+      {/* <Genericinput
         datatestid="common_login__input-email"
         type="email"
         selector="email"
         fieldName="Login"
         placeholder="exmple@exemplo.com"
         setter={ setEmail }
+      /> */}
+
+      <input
+        datatestid="common_login__input-email"
+        type="email"
+        selector="email"
+        fieldName="Login"
+        placeholder="exmple@exemplo.com"
+        onChange={ (e) => setEmail(e.target.value) }
       />
 
-      <Genericinput
+      {/* <Genericinput
         datatestid="common_login__input-password"
         type="password"
         selector="password"
         fieldName="Senha"
         placeholder="Min. 6 digítos"
         setter={ setPassword }
+      /> */}
+
+      <input
+        datatestid="common_login__input-password"
+        type="password"
+        selector="password"
+        fieldName="Senha"
+        placeholder="Min. 6 digítos"
+        onChange={ (e) => setPassword(e.target.value) }
       />
       <Button
         datatestid="common_login__button-login"

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Button from './Button';
 import { checkRegister } from '../utils/checkLogin';
+import './AdminRegister.css';
 
 function AdminRegister({ errorMessage, setNewUserData, createUser, newUserData }) {
   const handleChange = ({ target: { name, value } }) => {
@@ -17,6 +18,7 @@ function AdminRegister({ errorMessage, setNewUserData, createUser, newUserData }
         placeholder="Seu nome"
         onChange={ handleChange }
         data-testid="admin_manage__input-name"
+        className="form-input"
       />
 
       <input
@@ -26,6 +28,7 @@ function AdminRegister({ errorMessage, setNewUserData, createUser, newUserData }
         placeholder="example@exemplo.com"
         onChange={ handleChange }
         data-testid="admin_manage__input-email"
+        className="form-input"
       />
 
       <input
@@ -35,13 +38,16 @@ function AdminRegister({ errorMessage, setNewUserData, createUser, newUserData }
         placeholder="Min. 6 digítos"
         onChange={ handleChange }
         data-testid="admin_manage__input-password"
+        className="form-input"
       />
+
       <select
         onClick={ handleChange }
         onChange={ handleChange }
         data-testid="admin_manage__select-role"
         value={ newUserData.role }
         name="role"
+        className="form-select"
       >
         <option value="seller">Vendedor</option>
         <option value="customer">Customer</option>
@@ -55,12 +61,14 @@ function AdminRegister({ errorMessage, setNewUserData, createUser, newUserData }
         disabled={ checkRegister(newUserData) }
         onClick={ createUser }
         text="CADASTRAR"
+        className="form-button"
       />
 
-      <span data-testid="admin_manage__element-invalid-register">
+      <span data-testid="admin_manage__element-invalid-register" className="form-error">
         { errorMessage }
       </span>
     </form>
+
   );
 }
 

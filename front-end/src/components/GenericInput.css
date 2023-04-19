@@ -1,0 +1,20 @@
+.label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: #0077cc;
+    box-shadow: 0 0 5px #0077cc;
+  }
+  
