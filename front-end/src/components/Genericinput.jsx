@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import './GenericInput.css';
 
 function Genericinput({ selector, type, placeholder, setter, fieldName, datatestid }) {
   return (

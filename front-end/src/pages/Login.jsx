@@ -1,11 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from '../components/Button';
-// import Genericinput from '../components/Genericinput';
 import userContext from '../context/userContext';
 import { checkLogin } from '../utils/checkLogin';
 import { loginPost } from '../services/requests';
-// import './Login.css';
 
 function Login() {
   const history = useHistory();
@@ -54,22 +51,13 @@ function Login() {
         break;
       }
     } catch (error) {
-      const mensagem = error.response.data;
-      setErrorMessage(mensagem);
+      const message = error.response.data;
+      setErrorMessage(message);
     }
   };
 
   return (
-    <form>
-      {/* <Genericinput
-        datatestid="common_login__input-email"
-        type="email"
-        selector="email"
-        fieldName="Login"
-        placeholder="exmple@exemplo.com"
-        setter={ setEmail }
-      /> */}
-
+    <form className="form">
       <input
         datatestid="common_login__input-email"
         type="email"
@@ -79,15 +67,6 @@ function Login() {
         onChange={ (e) => setEmail(e.target.value) }
       />
 
-      {/* <Genericinput
-        datatestid="common_login__input-password"
-        type="password"
-        selector="password"
-        fieldName="Senha"
-        placeholder="Min. 6 digítos"
-        setter={ setPassword }
-      /> */}
-
       <input
         datatestid="common_login__input-password"
         type="password"
@@ -96,27 +75,31 @@ function Login() {
         placeholder="Min. 6 digítos"
         onChange={ (e) => setPassword(e.target.value) }
       />
-      <Button
+
+      <button
         datatestid="common_login__button-login"
         type="submit"
         name="login"
         disabled={ checkLogin(email, password) }
         onClick={ onLoginBtnClick }
-        text="Login"
-      />
-      <Button
+      >
+        Login
+      </button>
+      <button
         datatestid="common_login__button-register"
         type="submit"
         name="login"
         disabled={ false }
         onClick={ () => { history.push('/register'); } }
-        text="Ainda não tenho conta"
-      />
+      >
+        Ainda não tenho conta
+      </button>
 
       <span data-testid="common_login__element-invalid-email">
         {errorMessage}
       </span>
     </form>
+
   );
 }
 

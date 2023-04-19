@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Button from './Button';
 import { checkRegister } from '../utils/checkLogin';
-import './AdminRegister.css';
 
 function AdminRegister({ errorMessage, setNewUserData, createUser, newUserData }) {
   const handleChange = ({ target: { name, value } }) => {
