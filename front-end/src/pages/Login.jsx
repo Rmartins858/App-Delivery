@@ -57,8 +57,11 @@ function Login() {
   };
 
   return (
-    <form className="form">
-      <input
+    <div className='bg-gray-300 flex min-h-screen  items-center justify-center '>
+      
+      <form className='bg-white max-w-md p-10 rounded-xl shadow-xl z-20'>
+      <h1 className='text-4xl text-center font-bold mb-10'>Login</h1>
+      <input className='block p-2 bg-gray-200 rounded'
         datatestid="common_login__input-email"
         type="email"
         selector="email"
@@ -67,7 +70,7 @@ function Login() {
         onChange={ (e) => setEmail(e.target.value) }
       />
 
-      <input
+      <input className='block p-2 bg-gray-200 rounded mt-2'
         datatestid="common_login__input-password"
         type="password"
         selector="password"
@@ -76,7 +79,7 @@ function Login() {
         onChange={ (e) => setPassword(e.target.value) }
       />
 
-      <button
+      <button className='block mt-10 bg-green-700 w-full p-2 rounded text-white font-bold hover:bg-green-900'
         datatestid="common_login__button-login"
         type="submit"
         name="login"
@@ -84,8 +87,8 @@ function Login() {
         onClick={ onLoginBtnClick }
       >
         Login
-      </button>
-      <button
+      </button >
+      <button className='block mt-10 bg-gray-500 w-full p-2 rounded text-white font-bold hover:bg-gray-600'
         datatestid="common_login__button-register"
         type="submit"
         name="login"
@@ -99,6 +102,9 @@ function Login() {
         {errorMessage}
       </span>
     </form>
+
+    </div>
+    
 
   );
 }
