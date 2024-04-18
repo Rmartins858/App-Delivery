@@ -61,16 +61,16 @@ function Login() {
       
       <form className='bg-white max-w-md p-10 rounded-xl shadow-xl z-20'>
       <h1 className='text-4xl text-center font-bold mb-10'>Login</h1>
-      <input className='block p-2 bg-gray-200 rounded'
+      <input className="block p-2 bg-gray-200 rounded w-full focus:outline-none focus:bg-gray-300"
         datatestid="common_login__input-email"
         type="email"
         selector="email"
         fieldName="Login"
-        placeholder="exmple@exemplo.com"
+        placeholder="exemplo@exemplo.com"
         onChange={ (e) => setEmail(e.target.value) }
       />
 
-      <input className='block p-2 bg-gray-200 rounded mt-2'
+      <input className="block p-2 bg-gray-200 rounded w-full focus:outline-none focus:bg-gray-300 mt-2"
         datatestid="common_login__input-password"
         type="password"
         selector="password"

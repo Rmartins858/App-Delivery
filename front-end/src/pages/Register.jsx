@@ -33,11 +33,13 @@ function Register() {
   };
 
   return (
-    <form>
+    <div className='bg-gray-300 flex min-h-screen  items-center justify-center '>
+      <form className='bg-white max-w-md p-10 rounded-xl shadow-xl z-20'>
+        <h1 className='text-4xl text-center font-bold mb-10'>Cadastre-se</h1>
       <Genericinput
         type="text"
         selector="name"
-        fieldName="Nome"
+        fieldName="Nome "
         placeholder="Seu nome"
         setter={ setName }
         datatestid="common_register__input-name"
@@ -47,12 +49,12 @@ function Register() {
         type="email"
         selector="email"
         fieldName="Email"
-        placeholder="exmple@exemplo.com"
+        placeholder="exemplo@exemplo.com"
         setter={ setEmail }
         datatestid="common_register__input-email"
       />
 
-      <Genericinput
+      <Genericinput 
         type="password"
         selector="password"
         fieldName="Senha"
@@ -74,6 +76,7 @@ function Register() {
         { errorMessage }
       </span>
     </form>
+    </div>
   );
 }
 

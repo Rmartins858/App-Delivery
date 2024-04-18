@@ -7,6 +7,7 @@ function Button({ datatestid, type, name, disabled, onClick, text }) {
       data-testid={ datatestid }
       type={ type === 'submit' ? 'submit' : 'button' }
       name={ name }
+      className='block mt-10 bg-green-700 w-full p-2 rounded text-white font-bold hover:bg-green-900'
       disabled={ disabled }
       onClick={ onClick }
     >
