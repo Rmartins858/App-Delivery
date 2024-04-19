@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Button({ datatestid, type, name, disabled, onClick, text }) {
+function Button({ datatestid, type, name, disabled, onClick, text, className }) {
+
   return (
     <button
-      data-testid={ datatestid }
-      type={ type === 'submit' ? 'submit' : 'button' }
-      name={ name }
-      className='block mt-10 bg-green-700 w-full p-2 rounded text-white font-bold hover:bg-green-900'
-      disabled={ disabled }
-      onClick={ onClick }
+      data-testid={datatestid}
+      type={type === 'submit' ? 'submit' : 'button'}
+      name={name}
+      className={className}
+      disabled={disabled}
+      onClick={onClick}
     >
-      { text }
+      {text}
     </button>
   );
 }
@@ -23,6 +24,7 @@ Button.propTypes = {
   disabled: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 export default Button;
