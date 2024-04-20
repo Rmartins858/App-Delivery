@@ -70,7 +70,7 @@ function Register() {
         disabled={ checkRegister({ email, password, name }) }
         onClick={ onRegisterBtnClick }
         text="Cadastrar"
-        className="bg-red-700 w-full"
+        className="bg-green-700 w-full mt-10 rounded	hover:bg-green-800 text-white cursor-pointer p-2"
       />
 
       <span data-testid="common_register__element-invalid_register">
