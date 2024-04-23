@@ -22,7 +22,7 @@ function OrdersCard() {
   };
 
   return (
-    <div>
+    <div >
       {
         !orders.length ? 'sem pedido  :('
           : (
